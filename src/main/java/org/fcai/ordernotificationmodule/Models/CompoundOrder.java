@@ -4,10 +4,10 @@ import java.util.List;
 
 public class CompoundOrder implements Order {
     private OrderSpecs specs;
-    private List<SimpleOrder> simpleOrders;
+    private List<Order> simpleOrders;
     public final int MAX_ORDERS;
 
-    public CompoundOrder(OrderSpecs specs, int MAX_ORDERS, List<SimpleOrder> simpleOrders) {
+    public CompoundOrder(OrderSpecs specs, int MAX_ORDERS, List<Order> simpleOrders) {
         setSpecs(specs);
         this.MAX_ORDERS = MAX_ORDERS;
         setSimpleOrders(simpleOrders);
@@ -15,12 +15,12 @@ public class CompoundOrder implements Order {
 
     @Override
     public double getTotalPrice() {
-        return 0;
+        return 0; // TODO: to be implemented
     }
 
     @Override
     public String getOrderDetails() {
-        return null;
+        return null; // TODO: to be implemented
     }
 
     public OrderSpecs getSpecs() {
@@ -33,11 +33,11 @@ public class CompoundOrder implements Order {
         this.specs = specs;
     }
 
-    public List<SimpleOrder> getSimpleOrders() {
+    public List<Order> getSimpleOrders() {
         return simpleOrders;
     }
 
-    public void setSimpleOrders(List<SimpleOrder> simpleOrders) {
+    public void setSimpleOrders(List<Order> simpleOrders) {
         if (simpleOrders == null)
             throw new NullPointerException("SimpleOrders cannot be null");
         if (simpleOrders.size() > MAX_ORDERS)
