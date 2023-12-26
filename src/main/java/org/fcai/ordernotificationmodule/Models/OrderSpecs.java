@@ -1,5 +1,6 @@
 package org.fcai.ordernotificationmodule.Models;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class OrderSpecs {
@@ -8,6 +9,7 @@ public class OrderSpecs {
     private double productsPrice;
     private double shippingFees;
     private User user;
+    private final LocalDateTime creationDate;
 
     public OrderSpecs(String serialNumber, User user, double shippingFees) {
         setSerialNumber(serialNumber);
@@ -15,6 +17,7 @@ public class OrderSpecs {
         setUser(user);
         products = new HashMap<>();
         productsPrice = 0;
+        creationDate = LocalDateTime.now();
     }
 
     public String getSerialNumber() {
@@ -89,5 +92,9 @@ public class OrderSpecs {
             products.put(product, products.get(product) - quantity);
             productsPrice -= (product.getPrice() * quantity);
         } else throw new IllegalArgumentException("Product does not exist in the order");
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 }
