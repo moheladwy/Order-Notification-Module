@@ -1,5 +1,6 @@
 package org.fcai.ordernotificationmodule.Models;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class CompoundOrder implements Order {
@@ -21,6 +22,11 @@ public class CompoundOrder implements Order {
     @Override
     public String getOrderDetails() {
         return null; // TODO: to be implemented
+    }
+
+    @Override
+    public LocalDateTime getCreationDate() {
+        return specs.getCreationDate();
     }
 
     public OrderSpecs getSpecs() {

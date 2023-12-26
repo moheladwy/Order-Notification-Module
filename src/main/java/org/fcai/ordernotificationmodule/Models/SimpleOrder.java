@@ -1,6 +1,6 @@
 package org.fcai.ordernotificationmodule.Models;
 
-import java.util.HashMap;
+import java.time.LocalDateTime;
 
 public class SimpleOrder implements Order {
     private OrderSpecs specs;
@@ -19,6 +19,11 @@ public class SimpleOrder implements Order {
     @Override
     public String getOrderDetails() {
         return null; // TODO: to be implemented
+    }
+
+    @Override
+    public LocalDateTime getCreationDate() {
+        return specs.getCreationDate();
     }
 
     public OrderSpecs getSpecs() {
