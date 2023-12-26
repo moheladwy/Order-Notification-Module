@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
     private final DbContext context;
 
@@ -15,42 +16,42 @@ public class ProductController {
         this.context = context;
     }
 
-    @GetMapping("/products/get-all")
+    @GetMapping("/get-all")
     public List<Product> getAllProducts() {
         return context.productRepository.getAll();
     }
 
-    @GetMapping("/products/get-by-category/{categoryId}")
+    @GetMapping("/get-by-category/{categoryId}")
     public List<Product> getProductsByCategory(@PathVariable int categoryId) {
         return context.productRepository.getByCategory(categoryId);
     }
 
-    @GetMapping("/products/get-by-id/{id}")
+    @GetMapping("/get-by-id/{id}")
     public Product getProductById(@PathVariable int id) {
         return context.productRepository.getById(id);
     }
 
-    @PostMapping("/products/add")
+    @PostMapping("/add")
     public void addProduct(@RequestBody Product product) {
         context.productRepository.add(product);
     }
 
-    @PutMapping("/products/update-quantity/{id}/{quantity}")
+    @PutMapping("/update-quantity/{id}/{quantity}")
     public void updateProductQuantity(@PathVariable int id, @PathVariable int quantity) {
         context.productRepository.updateQuantity(id, quantity);
     }
 
-    @PutMapping("/products/update-price/{id}/{price}")
+    @PutMapping("/update-price/{id}/{price}")
     public void updateProductPrice(@PathVariable int id, @PathVariable double price) {
         context.productRepository.updatePrice(id, price);
     }
 
-    @PutMapping("/products/update-category/{id}/{categoryId}")
+    @PutMapping("/update-category/{id}/{categoryId}")
     public void updateProductCategory(@PathVariable int id, @PathVariable int categoryId) {
         context.productRepository.updateCategory(id, categoryId);
     }
 
-    @DeleteMapping("/products/remove/{id}")
+    @DeleteMapping("/remove/{id}")
     public void removeProduct(@PathVariable int id) {
         context.productRepository.remove(id);
     }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/category")
 public class CategoryController {
     private final DbContext context;
 
@@ -17,42 +18,42 @@ public class CategoryController {
         this.context = context;
     }
 
-    @GetMapping("/categories/get-all")
+    @GetMapping("/get-all")
     public List<Category> getAllCategories() {
         return context.categoryRepository.getAll();
     }
 
-    @GetMapping("/categories/get-by-id/{id}")
+    @GetMapping("/get-by-id/{id}")
     public Category getCategoryById(@PathVariable int id) {
         return context.categoryRepository.getById(id);
     }
 
-    @PostMapping("/categories/add-new-category")
+    @PostMapping("/add-new-category")
     public void addCategory(@RequestBody Category category) {
         context.categoryRepository.addNewCategory(category);
     }
 
-    @DeleteMapping("/categories/remove/{id}")
+    @DeleteMapping("/remove/{id}")
     public void removeCategory(@PathVariable int id) {
         context.categoryRepository.removeCategory(id);
     }
 
-    @PostMapping("/categories/add-product-to-category/{categoryId}/{productId}")
+    @PostMapping("/add-product-to-category/{categoryId}/{productId}")
     public void addProductToCategory(@PathVariable int categoryId, @PathVariable int productId) {
         context.categoryRepository.addProductToCategory(categoryId, productId);
     }
 
-    @DeleteMapping("/categories/remove-product-from-category/{categoryId}/{productId}")
+    @DeleteMapping("/remove-product-from-category/{categoryId}/{productId}")
     public void removeProductFromCategory(@PathVariable int categoryId, @PathVariable int productId) {
         context.categoryRepository.removeProductFromCategory(categoryId, productId);
     }
 
-    @GetMapping("/categories/get-products-by-category-id/{categoryId}")
+    @GetMapping("/get-products-by-category-id/{categoryId}")
     public List<Product> getProductsByCategory(@PathVariable int categoryId) {
         return context.categoryRepository.getProductsByCategory(categoryId);
     }
 
-    @PutMapping("/categories/update-product-quantity-in-category/{categoryId}/{productId}/{quantity}")
+    @PutMapping("/update-product-quantity-in-category/{categoryId}/{productId}/{quantity}")
     public void updateProductQuantityInCategory(@PathVariable int categoryId, @PathVariable int productId, @PathVariable int quantity) {
         context.categoryRepository.updateProductQuantityInCategory(categoryId, productId, quantity);
     }
