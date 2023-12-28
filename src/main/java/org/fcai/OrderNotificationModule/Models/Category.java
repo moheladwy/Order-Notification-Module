@@ -3,27 +3,28 @@ package org.fcai.OrderNotificationModule.Models;
 import org.fcai.OrderNotificationModule.Enums.CategoryName;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Category {
-    private String serialNumber;
+    private int serialNumber;
     private CategoryName name;
     private String description;
-    private HashMap<Product, Integer> products;
+    private List<Product> products;
 
-    public Category(String serialNumber, CategoryName name, String description, HashMap<Product, Integer> products) {
+    public Category(int serialNumber, CategoryName name, String description, List<Product> products) {
         setSerialNumber(serialNumber);
         setName(name);
         setDescription(description);
         setProducts(products);
     }
 
-    public String getSerialNumber() {
+    public int getSerialNumber() {
         return serialNumber;
     }
 
-    public void setSerialNumber(String serialNumber) {
-        if (serialNumber == null)
-            throw new NullPointerException("Serial number cannot be null");
+    public void setSerialNumber(int serialNumber) {
+        if (serialNumber <= 0)
+            throw new NullPointerException("Serial number must be bigger than zero");
         this.serialNumber = serialNumber;
     }
 
@@ -47,44 +48,30 @@ public class Category {
         this.description = description;
     }
 
-    public HashMap<Product, Integer> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(HashMap<Product, Integer> products) {
+    public void setProducts(List<Product> products) {
         if (products == null)
             throw new NullPointerException("Products cannot be null");
         this.products = products;
     }
 
-    public void addProduct(Product product, int quantity) {
+    public void addProduct(Product product) {
         if (product == null)
             throw new NullPointerException("Product cannot be null");
-        if (quantity <= 0)
-            throw new IllegalArgumentException("Quantity must be positive number");
-        if (products.containsKey(product)) {
-            products.put(product, products.get(product) + quantity);
-        } else {
-            products.put(product, quantity);
-        }
+
+        products.add(product);
     }
 
-    public void removeProduct(Product product, int quantity) {
+    public void removeProduct(Product product) {
         if (product == null)
             throw new NullPointerException("Product cannot be null");
-        if (quantity <= 0)
-            throw new IllegalArgumentException("Quantity must be positive number");
-        if (products.containsKey(product)) {
-            int currentQuantity = products.get(product);
-            if (currentQuantity - quantity == 0) {
-                products.remove(product);
-            } else if (currentQuantity - quantity > 0) {
-                products.put(product, products.get(product) - quantity);
-            } else {
-                throw new IllegalArgumentException("Quantity must be less than or equal to current quantity");
-            }
-        } else {
+
+        if(!products.remove(product))
             throw new IllegalArgumentException("Product does not exist in this category");
-        }
+
+        products.remove(product);
     }
 }

@@ -25,7 +25,7 @@ public class CategoryController {
 
     @GetMapping("/get-by-id/{id}")
     public Category getCategoryById(@PathVariable int id) {
-        return context.categoryRepository.getById(id);
+        return context.categoryRepository.getCategory(id);
     }
 
     @PostMapping("/add-new-category")
@@ -40,7 +40,8 @@ public class CategoryController {
 
     @PostMapping("/add-product-to-category/{categoryId}/{productId}")
     public void addProductToCategory(@PathVariable int categoryId, @PathVariable int productId) {
-        context.categoryRepository.addProductToCategory(categoryId, productId);
+        Product currentProduct = context.productRepository.getById(productId);
+        context.categoryRepository.addProductToCategory(categoryId, currentProduct);
     }
 
     @GetMapping("/get-products-by-category-id/{categoryId}")
