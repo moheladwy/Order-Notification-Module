@@ -2,30 +2,29 @@ package org.fcai.OrderNotificationModule.Models;
 
 import org.fcai.OrderNotificationModule.Enums.CategoryName;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class Category {
-    private int serialNumber;
+    private int id;
     private CategoryName name;
     private String description;
     private List<Product> products;
 
-    public Category(int serialNumber, CategoryName name, String description, List<Product> products) {
-        setSerialNumber(serialNumber);
+    public Category(int id, CategoryName name, String description, List<Product> products) {
+        setId(id);
         setName(name);
         setDescription(description);
         setProducts(products);
     }
 
-    public int getSerialNumber() {
-        return serialNumber;
+    public int getId() {
+        return id;
     }
 
-    public void setSerialNumber(int serialNumber) {
-        if (serialNumber <= 0)
+    public void setId(int id) {
+        if (id <= 0)
             throw new NullPointerException("Serial number must be bigger than zero");
-        this.serialNumber = serialNumber;
+        this.id = id;
     }
 
     public CategoryName getName() {

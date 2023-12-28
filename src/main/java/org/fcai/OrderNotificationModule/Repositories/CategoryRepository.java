@@ -1,5 +1,6 @@
 package org.fcai.OrderNotificationModule.Repositories;
 
+import org.fcai.OrderNotificationModule.Exceptions.CategoryNotFoundException;
 import org.fcai.OrderNotificationModule.Models.Category;
 import org.fcai.OrderNotificationModule.Models.Product;
 
@@ -8,16 +9,13 @@ import java.util.List;
 public class CategoryRepository {
     private List<Category> allCategories;
 
-
     public List<Category> getAll() {
         return allCategories;
     }
 
-
     public void addNewCategory(Category category) {
         if(category == null)
             throw new NullPointerException("Category can't be null");
-
         allCategories.add(category);
     }
 
@@ -25,7 +23,7 @@ public class CategoryRepository {
         Category currentCategory = getCategory(categoryId);
 
         if(currentCategory == null)
-            throw new NullPointerException("Category can't be null");
+            throw new CategoryNotFoundException(categoryId);
 
         allCategories.remove(currentCategory);
     }
@@ -34,16 +32,18 @@ public class CategoryRepository {
         Category currentCategory = getCategory(categoryId);
 
         if(currentCategory == null)
-            throw new NullPointerException("Category can't be null");
+            throw new CategoryNotFoundException(categoryId);
 
         currentCategory.addProduct(product);
     }
 
     public void removeProductFromCategory(int categoryId, Product product) {
-        Category currentCategory = getCategory(categoryId);
+        if (product == null)
+            throw new NullPointerException("Product can't be null");
 
-        if(currentCategory == null || product == null)
-            throw new NullPointerException("Category or product can't be null");
+        Category currentCategory = getCategory(categoryId);
+        if(currentCategory == null)
+            throw new CategoryNotFoundException(categoryId);
 
         currentCategory.removeProduct(product);
     }
@@ -52,19 +52,16 @@ public class CategoryRepository {
         Category currentCategory = getCategory(categoryId);
 
         if(currentCategory == null)
-            throw new NullPointerException("Category can't be null");
+            throw new CategoryNotFoundException(categoryId);
 
         return currentCategory.getProducts();
     }
 
-    public Category getCategory(int categoryId){
-
+    public Category getCategory(int categoryId) {
         //This loops till it finds the corresponding category
-        for (int i = 0; i < allCategories.size(); i++) {
-            Category currentCategory = allCategories.get(i);
-            if(currentCategory.getSerialNumber() == categoryId){
+        for (Category currentCategory : allCategories) {
+            if (currentCategory.getId() == categoryId)
                 return currentCategory;
-            }
         }
         //In case the category is not found.
         return null;
