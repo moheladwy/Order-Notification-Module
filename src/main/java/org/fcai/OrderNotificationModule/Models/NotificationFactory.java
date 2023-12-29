@@ -1,30 +1,20 @@
 package org.fcai.OrderNotificationModule.Models;
 
-import org.fcai.OrderNotificationModule.Enums.NotificationChannel;
-import org.fcai.OrderNotificationModule.Enums.NotificationLanguage;
 import org.fcai.OrderNotificationModule.Enums.OrderStatus;
+import org.springframework.stereotype.Component;
 
+@Component
 public class NotificationFactory {
-    public static Notification createNotification(NotificationLanguage language, OrderStatus status) {
-        String message;
+    public static Notification createNotification(NotificationSpecs specs, OrderStatus status) {
         switch (status) {
             case OrderPlaced -> {
-                if (language == NotificationLanguage.English)
-                    message = "Dear %s, your order %d has been placed";
-                else message = "عزيزي %s، تم إنشاء طلبك رقم %d بنجاح";
-                return new Notification(NotificationChannel.EMAIL, NotificationLanguage.Arabic, message);
+                return new OrderPlacedNotification(specs);
             }
             case OrderShipped -> {
-                if (language == NotificationLanguage.English)
-                    message = "Dear %s, your order %d has been shipped and will be delivered within %d days";
-                else message = "عزيزي %s، تم شحن طلبك رقم %d وسيتم توصيله خلال %d أيام";
-                return new Notification(NotificationChannel.EMAIL, NotificationLanguage.Arabic, message);
+                return new OrderShippedNotification(specs);
             }
             case OrderCancelled -> {
-                if (language == NotificationLanguage.English)
-                    message = "Dear %s, your order %d has been cancelled and you will be refunded %f within %d days";
-                else message = "عزيزي %s، تم إلغاء طلبك رقم %d وسيتم إرجاع المبلغ %f خلال %d أيام";
-                return new Notification(NotificationChannel.EMAIL, NotificationLanguage.Arabic, message);
+                return new OrderCancelledNotification(specs);
             }
             default -> throw new IllegalArgumentException("Invalid order status");
         }
