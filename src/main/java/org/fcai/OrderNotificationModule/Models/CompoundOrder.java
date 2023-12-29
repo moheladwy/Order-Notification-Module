@@ -29,6 +29,16 @@ public class CompoundOrder implements Order {
         return specs.getCreationDate();
     }
 
+    @Override
+    public int getId() {
+        return specs.getId();
+    }
+
+    @Override
+    public User getUser() {
+        return specs.getUser();
+    }
+
     public OrderSpecs getSpecs() {
         return specs;
     }
