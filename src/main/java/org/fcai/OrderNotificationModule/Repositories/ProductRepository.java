@@ -1,54 +1,54 @@
 package org.fcai.OrderNotificationModule.Repositories;
 
 import org.fcai.OrderNotificationModule.Exceptions.ProductNotFoundException;
-import org.fcai.OrderNotificationModule.Models.Category;
 import org.fcai.OrderNotificationModule.Models.Product;
-import org.springframework.web.bind.annotation.PathVariable;
-
-
 import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
 
 public class ProductRepository {
-    private HashMap<Product, Integer> products;
+    private final HashMap<Product, Integer> products;
+
+    public ProductRepository() {
+        products = new HashMap<Product, Integer>();
+    }
+
     public HashMap<Product,Integer> getAll() {
         return products;
     }
 
     public Product getById(int id) {
         for (Product key : products.keySet()){
-            if (Objects.equals(key.getSerialNumber(), id)){
+            if (key.getId() == id) {
                return key;
             }
         }
-        ProductNotFoundException exception= new ProductNotFoundException(id);
         return null;
     }
 
     public void add(Product product, int quantity) {
+        if (product == null)
+            throw new NullPointerException("Product cannot be null");
+        if (quantity < 1)
+            throw new IllegalArgumentException("Quantity cannot be less than 1");
         products.put(product,quantity);
     }
 
     public void remove(int id) {
         for (Product key : products.keySet()){
-            if (Objects.equals(key.getSerialNumber(), id)){
+            if (key.getId() == id) {
                 products.remove(key);
                 return;
             }
         }
-        ProductNotFoundException exception= new ProductNotFoundException(id);
+        throw new ProductNotFoundException(id);
     }
     
     public void updateQuantity(int id, int quantity) {
         for (Product key : products.keySet()){
-            if (Objects.equals(key.getSerialNumber(), id)){
+            if (key.getId() == id) {
                 products.put(key,quantity);
                 return;
             }
         }
-        ProductNotFoundException exception= new ProductNotFoundException(id);
+        throw new ProductNotFoundException(id);
     }
-
- 
 }

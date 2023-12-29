@@ -1,28 +1,26 @@
 package org.fcai.OrderNotificationModule.Models;
 
 public class Product {
-    private String serialNumber;
+    private int id;
     private String name;
     private String description;
     private String vendor;
     private double price;
 
-    public Product(String serialNumber, String name, String description, String vendor, double price) {
-        setSerialNumber(serialNumber);
+    public Product(int id, String name, String description, String vendor, double price) {
+        setId(id);
         setName(name);
         setDescription(description);
         setVendor(vendor);
         setPrice(price);
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
+    public int getId() {
+        return id;
     }
 
-    public void setSerialNumber(String serialNumber) {
-        if (serialNumber == null)
-            throw new NullPointerException("Serial number cannot be null");
-        this.serialNumber = serialNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

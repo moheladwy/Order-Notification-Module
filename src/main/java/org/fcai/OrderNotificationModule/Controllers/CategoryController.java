@@ -1,5 +1,7 @@
 package org.fcai.OrderNotificationModule.Controllers;
 
+import org.fcai.OrderNotificationModule.Exceptions.CategoryNotFoundException;
+import org.fcai.OrderNotificationModule.Exceptions.ProductNotFoundException;
 import org.fcai.OrderNotificationModule.Models.Category;
 import org.fcai.OrderNotificationModule.Models.Product;
 import org.fcai.OrderNotificationModule.Repositories.DbContext;
@@ -25,7 +27,10 @@ public class CategoryController {
 
     @GetMapping("/get-by-id/{id}")
     public Category getCategoryById(@PathVariable int id) {
-        return context.categoryRepository.getById(id);
+        Category category = context.categoryRepository.getCategory(id);
+        if (category == null)
+            throw new CategoryNotFoundException(id);
+        return category;
     }
 
     @PostMapping("/add-new-category")
@@ -40,7 +45,10 @@ public class CategoryController {
 
     @PostMapping("/add-product-to-category/{categoryId}/{productId}")
     public void addProductToCategory(@PathVariable int categoryId, @PathVariable int productId) {
-        context.categoryRepository.addProductToCategory(categoryId, productId);
+        Product currentProduct = context.productRepository.getById(productId);
+        if (currentProduct == null)
+            throw new ProductNotFoundException(productId);
+        context.categoryRepository.addProductToCategory(categoryId, currentProduct);
     }
 
     @GetMapping("/get-products-by-category-id/{categoryId}")
