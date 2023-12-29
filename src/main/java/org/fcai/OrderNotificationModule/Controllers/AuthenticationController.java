@@ -1,11 +1,10 @@
 package org.fcai.OrderNotificationModule.Controllers;
 
+import org.fcai.OrderNotificationModule.Helper.LoginRequest;
 import org.fcai.OrderNotificationModule.Models.User;
 import org.fcai.OrderNotificationModule.Repositories.DbContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AuthenticationController {
@@ -17,7 +16,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login/")
-    public User login(@RequestBody String username, @RequestBody String password) {
+    public User login(@RequestBody LoginRequest loginRequest) {
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
         return context.userRepository.isUserExist(username, password);
     }
 
@@ -25,4 +26,5 @@ public class AuthenticationController {
     public void register(@RequestBody User user) {
         context.userRepository.registerNewUser(user);
     }
+
 }
