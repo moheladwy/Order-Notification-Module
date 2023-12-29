@@ -1,27 +1,53 @@
 package org.fcai.OrderNotificationModule.Repositories;
 
+import org.fcai.OrderNotificationModule.Exceptions.OrderNotFoundException;
 import org.fcai.OrderNotificationModule.Models.Order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderRepository {
+    private final List<Order> orders;
+
+    public OrderRepository() {
+        this.orders = new ArrayList<>();
+    }
+
     public List<Order> getAll() {
-        return null; // TODO: implement this method.
+        return orders;
     }
 
     public Order getById(int id) {
-        return null; // TODO: implement this method.
+        for (Order order : orders) {
+            if (order.getId() == id) {
+                return order;
+            }
+        }
+        throw new OrderNotFoundException(id);
     }
 
     public void createSimpleOrder(Order order) {
-        // TODO: implement this method.
+        if (order == null) {
+            throw new IllegalArgumentException("Order cannot be null");
+        }
+        orders.add(order);
     }
 
     public void createCompoundOrder(Order order) {
-        // TODO: implement this method.
+        if (order == null) {
+            throw new IllegalArgumentException("Order cannot be null");
+        }
+        orders.add(order);
     }
 
     public void delete(Order order) {
-        // TODO: implement this method.
+        if (order == null) {
+            throw new IllegalArgumentException("Order cannot be null");
+        }
+        boolean removed = orders.remove(order);
+        if (!removed) {
+            throw new OrderNotFoundException(order.getId());
+        }
     }
 }
+
