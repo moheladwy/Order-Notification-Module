@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class OrderSpecs {
-    private String serialNumber;
+    private int id;
     private HashMap<Product, Integer> products;
     private double productsPrice;
     private double shippingFees;
     private User user;
     private final LocalDateTime creationDate;
 
-    public OrderSpecs(String serialNumber, User user, double shippingFees) {
-        setSerialNumber(serialNumber);
+    public OrderSpecs(int id, User user, double shippingFees) {
+        setId(id);
         setShippingFees(shippingFees);
         setUser(user);
         products = new HashMap<>();
@@ -20,14 +20,12 @@ public class OrderSpecs {
         creationDate = LocalDateTime.now();
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
+    public int getId() {
+        return id;
     }
 
-    public void setSerialNumber(String serialNumber) {
-        if (serialNumber == null)
-            throw new NullPointerException("Serial Number cannot be null");
-        this.serialNumber = serialNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getShippingFees() {
