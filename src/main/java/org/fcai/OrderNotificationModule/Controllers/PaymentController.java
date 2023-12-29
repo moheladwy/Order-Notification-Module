@@ -1,5 +1,11 @@
 package org.fcai.OrderNotificationModule.Controllers;
 
+import org.fcai.OrderNotificationModule.Exceptions.NotEnoughBalance;
+import org.fcai.OrderNotificationModule.Exceptions.OrderNotFoundException;
+import org.fcai.OrderNotificationModule.Exceptions.OrderCancellationDurationException;
+import org.fcai.OrderNotificationModule.Models.Order;
+import org.fcai.OrderNotificationModule.Models.User;
+import org.fcai.OrderNotificationModule.Enums.OrderStatus;
 import org.fcai.OrderNotificationModule.Repositories.DbContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +21,21 @@ public class PaymentController {
     }
 
     @GetMapping("/pay-order/{orderId}")
-    public boolean pay(@PathVariable int orderId) {
-        try {
-            System.out.println("Payment processed for order ID: " + orderId);
-            return true;
-        } catch (Exception e) {
-            System.err.println("Payment failed for order ID: " + orderId);
-            e.printStackTrace();
-            return false;
+    public boolean pay(@PathVariable int orderId) throws OrderNotFoundException, OrderCancellationDurationException {
+        Order order = context.orderRepository.getById(orderId);
+
+
+        if (order == null) {
+            throw new OrderNotFoundException(orderId);
         }
+
+        double orderTotalPrice = order.getTotalPrice();
+        User user = order.getUser();
+        if (orderTotalPrice > user.getBalance()) {
+            throw new NotEnoughBalance( user.getBalance(),orderTotalPrice);
+        }
+        user.setBalance(user.getBalance() - orderTotalPrice);
+
+        return true;
     }
 }
