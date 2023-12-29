@@ -1,5 +1,6 @@
 package org.fcai.OrderNotificationModule.Controllers;
 
+import org.fcai.OrderNotificationModule.Exceptions.ProductNotFoundException;
 import org.fcai.OrderNotificationModule.Models.Product;
 import org.fcai.OrderNotificationModule.Repositories.DbContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,10 @@ public class ProductController {
 
     @GetMapping("/get-by-id/{id}")
     public Product getProductById(@PathVariable int id) {
-        return context.productRepository.getById(id);
+        Product product = context.productRepository.getById(id);
+        if (product == null)
+            throw new ProductNotFoundException(id);
+        return product;
     }
 
     @PostMapping("/add")
