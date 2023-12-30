@@ -13,10 +13,15 @@ public class DbContext {
     public final OrderRepository orderRepository;
 
     public DbContext() {
-        this.userRepository = initializeUserRepository();
-        this.productRepository = initializeProductRepository();
-        this.categoryRepository = initializeCategoryRepository();
-        this.orderRepository = initializeOrderRepository();
+        try {
+            userRepository = initializeUserRepository();
+            productRepository = initializeProductRepository();
+            categoryRepository = initializeCategoryRepository();
+            orderRepository = initializeOrderRepository();
+        } catch (Exception e) {
+            System.err.println("Error initializing repositories: " + e.getMessage());
+            throw e;
+        }
     }
 
     private static UserRepository initializeUserRepository() {
