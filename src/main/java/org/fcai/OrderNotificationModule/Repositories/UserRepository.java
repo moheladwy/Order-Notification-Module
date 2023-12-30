@@ -1,13 +1,46 @@
 package org.fcai.OrderNotificationModule.Repositories;
 
 import org.fcai.OrderNotificationModule.Models.User;
+import org.fcai.OrderNotificationModule.Exceptions.UserNotFoundException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserRepository {
+    private final List<User> users;
+
+    public UserRepository() {
+        this.users = new ArrayList<>();
+    }
+
     public User isUserExist(String username, String password) {
-        return null; // TODO: Implement this method.
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public void registerNewUser(User user) {
-        // TODO: Implement this method.
+        // Check for null values
+        if (user == null || user.getUsername() == null || user.getPassword() == null) {
+            throw new IllegalArgumentException("User, username, and password cannot be null");
+        }
+
+        if (isUsernameTaken(user.getUsername())) {
+            throw new IllegalArgumentException("Username is already taken");
+        }
+
+        users.add(user);
+    }
+
+    private boolean isUsernameTaken(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -16,13 +16,39 @@ public class CompoundOrder implements Order {
 
     @Override
     public double getTotalPrice() {
-        return 0; // TODO: to be implemented
+        double totalPrice = 0;
+        for (Order order : simpleOrders) {
+            totalPrice += order.getTotalPrice();
+        }
+        return totalPrice + specs.getShippingFees();
     }
 
     @Override
     public String getOrderDetails() {
-        return null; // TODO: to be implemented
+        StringBuilder orderDetails = new StringBuilder();
+        orderDetails.append("Compound Order ID: ").append(specs.getId()).append("\n");
+
+        User user = specs.getUser();
+        if (user != null) {
+            orderDetails.append("User: ").append(user.getUsername()).append("\n");
+        } else {
+            orderDetails.append("User: Unknown\n");
+        }
+
+        orderDetails.append("Creation Date: ").append(specs.getCreationDate()).append("\n");
+        orderDetails.append("Simple Orders:\n");
+
+        if (simpleOrders != null) {
+            for (Order simpleOrder : simpleOrders) {
+                orderDetails.append(simpleOrder.getOrderDetails()).append("\n");
+            }
+        }
+
+        orderDetails.append("Total Price: ").append(getTotalPrice()).append("\n");
+
+        return orderDetails.toString();
     }
+
 
     @Override
     public LocalDateTime getCreationDate() {
@@ -30,15 +56,13 @@ public class CompoundOrder implements Order {
     }
 
     @Override
-    public int getId() {
-        return specs.getId();
-    }
-
-    @Override
     public User getUser() {
         return specs.getUser();
     }
-
+    @Override
+    public int getId() {
+        return specs.getId();
+    }
     public OrderSpecs getSpecs() {
         return specs;
     }
