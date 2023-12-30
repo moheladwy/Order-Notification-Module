@@ -17,6 +17,12 @@ public class Category {
         setProducts(products);
     }
 
+    public Category(int id, CategoryName categoryName, String description) {
+        setId(id);
+        setName(categoryName);
+        setDescription(description);
+    }
+
     public int getId() {
         return id;
     }
