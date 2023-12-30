@@ -2,10 +2,11 @@ package org.fcai.OrderNotificationModule.Models;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 
 public class OrderSpecs {
     private int id;
-    private HashMap<Product, Integer> products;
+    private Map<Product, Integer> products;
     private double productsPrice;
     private double shippingFees;
     private User user;
@@ -38,11 +39,11 @@ public class OrderSpecs {
         this.shippingFees = shippingFees;
     }
 
-    public HashMap<Product, Integer> getProducts() {
+    public Map<Product, Integer> getProducts() {
         return products;
     }
 
-    public void setProducts(HashMap<Product, Integer> products) {
+    public void setProducts(Map<Product, Integer> products) {
         if (products == null)
             throw new NullPointerException("Products cannot be null");
         this.products = products;
