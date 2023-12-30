@@ -1,38 +1,54 @@
 package org.fcai.OrderNotificationModule.Repositories;
-import org.fcai.OrderNotificationModule.Models.Product;
 
-import java.util.List;
+import org.fcai.OrderNotificationModule.Exceptions.ProductNotFoundException;
+import org.fcai.OrderNotificationModule.Models.Product;
+import java.util.HashMap;
 
 public class ProductRepository {
-    public List<Product> getAll() {
-        return null; // TODO: implement this method.
+    private final HashMap<Product, Integer> products;
+
+    public ProductRepository() {
+        products = new HashMap<Product, Integer>();
+    }
+
+    public HashMap<Product,Integer> getAll() {
+        return products;
     }
 
     public Product getById(int id) {
-        return null; // TODO: implement this method.
+        for (Product key : products.keySet()){
+            if (key.getId() == id) {
+               return key;
+            }
+        }
+        return null;
     }
 
-    public void add(Product product) {
-        // TODO: implement this method.
+    public void add(Product product, int quantity) {
+        if (product == null)
+            throw new NullPointerException("Product cannot be null");
+        if (quantity < 1)
+            throw new IllegalArgumentException("Quantity cannot be less than 1");
+        products.put(product,quantity);
     }
 
     public void remove(int id) {
-        // TODO: implement this method.
+        for (Product key : products.keySet()){
+            if (key.getId() == id) {
+                products.remove(key);
+                return;
+            }
+        }
+        throw new ProductNotFoundException(id);
     }
-
-    public List<Product> getByCategory(int categoryId) {
-        return null; // TODO: implement this method.
-    }
-
+    
     public void updateQuantity(int id, int quantity) {
-        // TODO: implement this method.
-    }
-
-    public void updatePrice(int id, double price) {
-        // TODO: implement this method.
-    }
-
-    public void updateCategory(int id, int categoryId) {
-        // TODO: implement this method.
+        for (Product key : products.keySet()){
+            if (key.getId() == id) {
+                products.put(key,quantity);
+                return;
+            }
+        }
+        throw new ProductNotFoundException(id);
     }
 }

@@ -6,4 +6,6 @@ public interface Order {
     double getTotalPrice();
     String getOrderDetails();
     LocalDateTime getCreationDate();
+    int getId();
+    User getUser();
 }
