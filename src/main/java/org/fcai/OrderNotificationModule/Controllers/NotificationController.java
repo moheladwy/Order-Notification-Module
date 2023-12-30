@@ -7,11 +7,10 @@ import org.fcai.OrderNotificationModule.Models.Notification;
 import org.fcai.OrderNotificationModule.Models.NotificationFactory;
 import org.fcai.OrderNotificationModule.Models.NotificationSpecs;
 import org.fcai.OrderNotificationModule.Models.Order;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,7 +19,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 @EnableScheduling
-@EnableAsync
 @RestController
 @RequestMapping("/notifications")
 public class NotificationController {
@@ -42,7 +40,6 @@ public class NotificationController {
     }
 
     @Scheduled(fixedDelay = 1000)
-    @Async
     public void sendNotification() {
         try {
             System.out.println("Sending notification");
