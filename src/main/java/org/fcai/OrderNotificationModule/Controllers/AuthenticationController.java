@@ -1,6 +1,6 @@
 package org.fcai.OrderNotificationModule.Controllers;
 
-import org.fcai.OrderNotificationModule.Helper.LoginRequest;
+import org.fcai.OrderNotificationModule.Helpers.LoginRequest;
 import org.fcai.OrderNotificationModule.Models.User;
 import org.fcai.OrderNotificationModule.Repositories.DbContext;
 import org.fcai.OrderNotificationModule.Exceptions.UserNotFoundException;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/auth")
 public class AuthenticationController {
     private final DbContext context;
 
