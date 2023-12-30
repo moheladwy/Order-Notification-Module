@@ -31,5 +31,16 @@ public abstract class Notification {
         this.template = template;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Notification type: %s, " +
+                            "Notification channel: %s, " +
+                            "Notification language: %s, " +
+                            "Notification message: %s.",
+                            this.getClass().getSimpleName(),
+                            this.getChannel(), this.getLanguage(),
+                            this.getNotificationMessage());
+    }
+
     public abstract String getNotificationMessage();
 }
