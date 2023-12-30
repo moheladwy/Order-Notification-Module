@@ -1,11 +1,10 @@
 package org.fcai.OrderNotificationModule.Controllers;
 
-import org.fcai.OrderNotificationModule.Exceptions.NotEnoughBalance;
+import org.fcai.OrderNotificationModule.Exceptions.BalanceNotEnoughException;
 import org.fcai.OrderNotificationModule.Exceptions.OrderNotFoundException;
 import org.fcai.OrderNotificationModule.Exceptions.OrderCancellationDurationException;
 import org.fcai.OrderNotificationModule.Models.Order;
 import org.fcai.OrderNotificationModule.Models.User;
-import org.fcai.OrderNotificationModule.Enums.OrderStatus;
 import org.fcai.OrderNotificationModule.Repositories.DbContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +31,7 @@ public class PaymentController {
         double orderTotalPrice = order.getTotalPrice();
         User user = order.getUser();
         if (orderTotalPrice > user.getBalance()) {
-            throw new NotEnoughBalance( user.getBalance(),orderTotalPrice);
+            throw new BalanceNotEnoughException( user.getBalance(),orderTotalPrice);
         }
         user.setBalance(user.getBalance() - orderTotalPrice);
 

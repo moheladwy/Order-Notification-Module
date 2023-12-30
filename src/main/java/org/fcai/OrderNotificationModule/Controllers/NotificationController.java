@@ -4,7 +4,7 @@ import org.fcai.OrderNotificationModule.Enums.NotificationChannel;
 import org.fcai.OrderNotificationModule.Enums.NotificationLanguage;
 import org.fcai.OrderNotificationModule.Enums.OrderStatus;
 import org.fcai.OrderNotificationModule.Models.Notification;
-import org.fcai.OrderNotificationModule.Models.NotificationFactory;
+import org.fcai.OrderNotificationModule.Helpers.NotificationFactory;
 import org.fcai.OrderNotificationModule.Models.NotificationSpecs;
 import org.fcai.OrderNotificationModule.Models.Order;
 import org.springframework.scheduling.annotation.EnableScheduling;

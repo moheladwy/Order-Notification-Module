@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Orders")
+@RequestMapping("/orders")
 public class OrderController {
     private final DbContext context;
     private final int MAX_CANCEL_DURATION_IN_MINUTES;
