@@ -19,6 +19,7 @@ public class PaymentController {
         this.context = context;
     }
 
+    // DONE.
     @GetMapping("/pay-order/{orderId}")
     public boolean pay(@PathVariable int orderId) throws OrderNotFoundException, OrderCancellationDurationException {
         Order order = context.orderRepository.getById(orderId);

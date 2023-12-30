@@ -28,7 +28,7 @@ public class DbContext {
     private static UserRepository initializeUserRepository() {
         UserRepository userRepository = new UserRepository();
 
-        userRepository.registerNewUser(new User("user1", "User One", "user1@example.com", "password1", "Address1", "123456789", "Area1", 1000.0));
+        userRepository.registerNewUser(new User("user1", "User One", "user1@example.com", "password1", "Address1", "123456789", "Area1", 2000.0));
         userRepository.registerNewUser(new User("user2", "User Two", "user2@example.com", "password2", "Address2", "987654321", "Area2", 1500.0));
         userRepository.registerNewUser(new User("user3", "User Three", "user3@example.com", "password3", "Address3", "123456789", "Area3", 2000.0));
         userRepository.registerNewUser(new User("user4", "User Four", "user4@example.com", "password4", "Address4", "987654321", "Area4", 2500.0));
@@ -38,6 +38,7 @@ public class DbContext {
 
     private static ProductRepository initializeProductRepository() {
         ProductRepository productRepository= new ProductRepository();
+
         productRepository.add(new Product(0,"Jeans","","Omar",200),60 );
         productRepository.add(new Product(1,"T-shirts","","Omar",200),70 );
         productRepository.add(new Product(2,"Jackets","","Omar",200),50 );
@@ -59,9 +60,14 @@ public class DbContext {
 
     }
 
-    private static CategoryRepository initializeCategoryRepository() {
+    // TODO: Add products for each category.
+    // ASSIGN: Adham
+    private CategoryRepository initializeCategoryRepository() {
         CategoryRepository categoryRepository = new CategoryRepository();
+
         categoryRepository.addNewCategory(new Category(1, CategoryName.FOOD, "Soft drinks, coffees, teas, beers, and ales"));
+        categoryRepository.addProductToCategory(1, productRepository.getById(0));
+        categoryRepository.addProductToCategory(1, productRepository.getById(1));
         categoryRepository.addNewCategory(new Category(2, CategoryName.FURNITURE, "Chairs, tables, beds, desks, dressers, and cupboards"));
         categoryRepository.addNewCategory(new Category(3, CategoryName.GROCERIES, "Bread, cheese, eggs, milk, and other dairy products"));
         categoryRepository.addNewCategory(new Category(4, CategoryName.HEALTH, "Medicines, vitamins, bandages, and other medical supplies"));

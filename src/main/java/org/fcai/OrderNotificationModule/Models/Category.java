@@ -2,6 +2,7 @@ package org.fcai.OrderNotificationModule.Models;
 
 import org.fcai.OrderNotificationModule.Enums.CategoryName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Category {
@@ -9,6 +10,10 @@ public class Category {
     private CategoryName name;
     private String description;
     private List<Product> products;
+
+    public Category() {
+
+    }
 
     public Category(int id, CategoryName name, String description, List<Product> products) {
         try {
@@ -27,6 +32,7 @@ public class Category {
             setId(id);
             setName(categoryName);
             setDescription(description);
+            products = new ArrayList<>();
         } catch (NullPointerException | IllegalArgumentException e) {
             System.err.println("Failed to make category: " + e.getMessage());
             throw e;

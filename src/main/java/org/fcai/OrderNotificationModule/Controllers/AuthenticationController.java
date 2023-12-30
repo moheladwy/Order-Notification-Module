@@ -1,11 +1,12 @@
 package org.fcai.OrderNotificationModule.Controllers;
 
-import org.fcai.OrderNotificationModule.Helpers.LoginRequest;
 import org.fcai.OrderNotificationModule.Models.User;
 import org.fcai.OrderNotificationModule.Repositories.DbContext;
-import org.fcai.OrderNotificationModule.Exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
@@ -17,33 +18,14 @@ public class AuthenticationController {
         this.context = context;
     }
 
-    @PostMapping("/login/")
-    public User login(@RequestBody LoginRequest loginRequest) {
-        if(loginRequest == null) {
-            throw new IllegalArgumentException("Login request cannot be null");
-        }
-        String username = loginRequest.getUsername();
-        String password = loginRequest.getPassword();
-
-        // Check for null values
-        if (username == null || password == null) {
-            throw new IllegalArgumentException("Username and password cannot be null");
-        }
-        User user = context.userRepository.isUserExist(username, password);
-        // Throw exception if user is not found
-        if (user == null) {
-            throw new UserNotFoundException(username);
-        }
-        return user;
-    }
-
-    @PostMapping("/register/")
+    // DONE.
+    @PostMapping("/register")
     public void register(@RequestBody User user) {
-        // Check for null values
-        if (user == null || user.getUsername() == null || user.getPassword() == null) {
-            throw new IllegalArgumentException("username, and password cannot be null");
+        try {
+            context.userRepository.registerNewUser(user);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            System.err.println("Failed to register new user" + e.getMessage());
+            throw e;
         }
-        context.userRepository.registerNewUser(user);
     }
-
 }
