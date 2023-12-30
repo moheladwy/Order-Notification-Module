@@ -28,21 +28,21 @@ public class OrderRepository {
 
     public void createSimpleOrder(Order order) {
         if (order == null) {
-            throw new IllegalArgumentException("Order cannot be null");
+            throw new NullPointerException("Order cannot be null");
         }
         orders.add(order);
     }
 
     public void createCompoundOrder(Order order) {
         if (order == null) {
-            throw new IllegalArgumentException("Order cannot be null");
+            throw new NullPointerException("Order cannot be null");
         }
         orders.add(order);
     }
 
     public void delete(Order order) {
         if (order == null) {
-            throw new IllegalArgumentException("Order cannot be null");
+            throw new NullPointerException("Order cannot be null");
         }
         boolean removed = orders.remove(order);
         if (!removed) {

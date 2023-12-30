@@ -8,11 +8,16 @@ public class Product {
     private double price;
 
     public Product(int id, String name, String description, String vendor, double price) {
-        setId(id);
-        setName(name);
-        setDescription(description);
-        setVendor(vendor);
-        setPrice(price);
+        try {
+            setId(id);
+            setName(name);
+            setDescription(description);
+            setVendor(vendor);
+            setPrice(price);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            System.out.println("Failed to make product: " +e.getMessage());
+            throw e;
+        }
     }
 
     public int getId() {

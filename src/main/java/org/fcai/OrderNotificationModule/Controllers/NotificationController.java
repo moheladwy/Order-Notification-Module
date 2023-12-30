@@ -33,14 +33,19 @@ public class NotificationController {
                                  @RequestBody NotificationLanguage language,
                                  @RequestBody NotificationChannel channel,
                                  @PathVariable OrderStatus orderStatus) {
-        NotificationSpecs specs = new NotificationSpecs(order.getId(),
-                order.getUser().getName(), order.getTotalPrice(), 7, channel, language);
-        Notification notification = NotificationFactory.createNotification(specs, orderStatus);
-        notificationQueue.add(notification);
+        try {
+            NotificationSpecs specs = new NotificationSpecs(order.getId(),
+                    order.getUser().getName(), order.getTotalPrice(), 7, channel, language);
+            Notification notification = NotificationFactory.createNotification(specs, orderStatus);
+            notificationQueue.add(notification);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            System.err.println("Cannot send notification: " + e.getMessage());
+            throw e;
+        }
     }
 
     @Scheduled(fixedDelay = 1000)
-    public void sendNotification() {
+    public void sendNotification() throws IOException {
         try {
             System.out.println("Sending notification");
             File file = new File("target/Logging/SendingNotificationLoggingFile.txt");
@@ -56,7 +61,8 @@ public class NotificationController {
             outputStream.close();
         }
         catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.err.println("Cannot send notification: " + e.getMessage());
+            throw e;
         }
     }
 }

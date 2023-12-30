@@ -47,6 +47,7 @@ public class SimpleOrder implements Order {
     public int getId() {
         return specs.getId();
     }
+
     public OrderSpecs getSpecs() {
         return specs;
     }
@@ -58,10 +59,20 @@ public class SimpleOrder implements Order {
     }
 
     public void addProduct(Product product, int quantity) {
-        specs.addProduct(product, quantity);
+        try {
+            specs.addProduct(product, quantity);
+        } catch (IllegalArgumentException | NullPointerException e) {
+            System.err.println("Failed to add product: " + e.getMessage());
+            throw e;
+        }
     }
 
     public void removeProduct(Product product, int quantity) {
-        specs.removeProduct(product, quantity);
+        try {
+            specs.removeProduct(product, quantity);
+        } catch (IllegalArgumentException | NullPointerException e) {
+            System.err.println("Failed to remove product: " + e.getMessage());
+            throw e;
+        }
     }
 }

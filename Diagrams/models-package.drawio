@@ -1,0 +1,83 @@
+<mxfile host="Electron" modified="2023-12-30T18:44:18.784Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.16 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" version="22.1.16" etag="to-EGsEkHdkxLnQnaQdp" type="device">
+  <diagram id="Eoa6peInoDNm0B2ed55w" name="Page-1">
+    <mxGraphModel dx="2087" dy="1439" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="node10" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Category&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- name: CategoryName&lt;br/&gt;- products: List&amp;lt;Product&amp;gt;&lt;br/&gt;- id: int&lt;br/&gt;- description: String&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ setId(int): void&lt;br/&gt;+ getDescription(): String&lt;br/&gt;+ getName(): CategoryName&lt;br/&gt;+ addProduct(Product): void&lt;br/&gt;+ getProducts(): List&amp;lt;Product&amp;gt;&lt;br/&gt;+ setName(CategoryName): void&lt;br/&gt;+ removeProduct(Product): void&lt;br/&gt;+ setProducts(List&amp;lt;Product&amp;gt;): void&lt;br/&gt;+ getId(): int&lt;br/&gt;+ setDescription(String): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="1051" y="165" width="257" height="369" as="geometry" />
+        </mxCell>
+        <mxCell id="node7" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;CompoundOrder&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ MAX_ORDERS: int&lt;br/&gt;- specs: OrderSpecs&lt;br/&gt;- simpleOrders: List&amp;lt;Order&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getId(): int&lt;br/&gt;+ setSpecs(OrderSpecs): void&lt;br/&gt;+ setSimpleOrders(List&amp;lt;Order&amp;gt;): void&lt;br/&gt;+ getUser(): User&lt;br/&gt;+ getTotalPrice(): double&lt;br/&gt;+ getCreationDate(): LocalDateTime&lt;br/&gt;+ getOrderDetails(): String&lt;br/&gt;+ getSimpleOrders(): List&amp;lt;Order&amp;gt;&lt;br/&gt;+ getSpecs(): OrderSpecs&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="570" y="204" width="256" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="node8" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Notification&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;# template: String&lt;br/&gt;# channel: NotificationChannel&lt;br/&gt;# language: NotificationLanguage&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ setTemplate(String): void&lt;br/&gt;+ getNotificationMessage(): String&lt;br/&gt;+ getTemplate(): String&lt;br/&gt;+ toString(): String&lt;br/&gt;+ getChannel(): NotificationChannel&lt;br/&gt;+ getLanguage(): NotificationLanguage&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="206" y="990" width="280" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="node5" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;NotificationSpecs&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- language: NotificationLanguage&lt;br/&gt;- customerName: String&lt;br/&gt;- refundAmount: double&lt;br/&gt;- channel: NotificationChannel&lt;br/&gt;- nDays: int&lt;br/&gt;- orderNumber: int&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getRefundAmount(): double&lt;br/&gt;+ setChannel(NotificationChannel): void&lt;br/&gt;+ setCustomerName(String): void&lt;br/&gt;+ getChannel(): NotificationChannel&lt;br/&gt;+ setLanguage(NotificationLanguage): void&lt;br/&gt;+ setRefundAmount(double): void&lt;br/&gt;+ setOrderNumber(int): void&lt;br/&gt;+ getLanguage(): NotificationLanguage&lt;br/&gt;+ getNumberDays(): int&lt;br/&gt;+ getCustomerName(): String&lt;br/&gt;+ setNumberDays(int): void&lt;br/&gt;+ getOrderNumber(): int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="1410" y="178" width="320" height="457" as="geometry" />
+        </mxCell>
+        <mxCell id="node1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br/&gt;&lt;b&gt;Order&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getUser(): User&lt;br/&gt;+ getTotalPrice(): double&lt;br/&gt;+ getOrderDetails(): String&lt;br/&gt;+ getId(): int&lt;br/&gt;+ getCreationDate(): LocalDateTime&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="574.5" y="-250" width="247" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="node4" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;OrderCancelledNotification&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- specs: NotificationSpecs&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getNotificationMessage(): String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="223.5" y="1535" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="node2" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;OrderPlacedNotification&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- specs: NotificationSpecs&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getNotificationMessage(): String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="490" y="1533" width="245" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="node6" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;OrderShippedNotification&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- specs: NotificationSpecs&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getNotificationMessage(): String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="-40" y="1535" width="246" height="108" as="geometry" />
+        </mxCell>
+        <mxCell id="node9" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;OrderSpecs&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- productsPrice: double&lt;br/&gt;- id: int&lt;br/&gt;- products: HashMap&amp;lt;Product, Integer&amp;gt;&lt;br/&gt;- shippingFees: double&lt;br/&gt;- user: User&lt;br/&gt;- creationDate: LocalDateTime&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getId(): int&lt;br/&gt;+ setShippingFees(double): void&lt;br/&gt;+ getProducts(): HashMap&amp;lt;Product, Integer&amp;gt;&lt;br/&gt;+ getProductsPrice(): double&lt;br/&gt;+ getUser(): User&lt;br/&gt;+ setProductsPrice(double): void&lt;br/&gt;+ setUser(User): void&lt;br/&gt;+ removeProduct(Product, int): void&lt;br/&gt;+ setProducts(HashMap&amp;lt;Product, Integer&amp;gt;): void&lt;br/&gt;+ setId(int): void&lt;br/&gt;+ addProduct(Product, int): void&lt;br/&gt;+ getShippingFees(): double&lt;br/&gt;+ getCreationDate(): LocalDateTime&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="805" y="991" width="329" height="489" as="geometry" />
+        </mxCell>
+        <mxCell id="node11" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Product&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- id: int&lt;br/&gt;- name: String&lt;br/&gt;- description: String&lt;br/&gt;- vendor: String&lt;br/&gt;- price: double&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getName(): String&lt;br/&gt;+ getVendor(): String&lt;br/&gt;+ setId(int): void&lt;br/&gt;+ getId(): int&lt;br/&gt;+ setDescription(String): void&lt;br/&gt;+ setVendor(String): void&lt;br/&gt;+ setPrice(double): void&lt;br/&gt;+ setName(String): void&lt;br/&gt;+ getPrice(): double&lt;br/&gt;+ getDescription(): String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="1450" y="780" width="255" height="388" as="geometry" />
+        </mxCell>
+        <mxCell id="node0" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;SimpleOrder&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- specs: OrderSpecs&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getSpecs(): OrderSpecs&lt;br/&gt;+ getOrderDetails(): String&lt;br/&gt;+ getCreationDate(): LocalDateTime&lt;br/&gt;+ getTotalPrice(): double&lt;br/&gt;+ getId(): int&lt;br/&gt;+ addProduct(Product, int): void&lt;br/&gt;+ setSpecs(OrderSpecs): void&lt;br/&gt;+ getUser(): User&lt;br/&gt;+ removeProduct(Product, int): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="2030" y="225" width="265" height="281" as="geometry" />
+        </mxCell>
+        <mxCell id="node3" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;User&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- balance: double&lt;br/&gt;- password: String&lt;br/&gt;- phoneNumber: String&lt;br/&gt;- username: String&lt;br/&gt;- area: String&lt;br/&gt;- name: String&lt;br/&gt;- email: String&lt;br/&gt;- address: String&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ getPassword(): String&lt;br/&gt;+ setArea(String): void&lt;br/&gt;+ getName(): String&lt;br/&gt;+ getBalance(): double&lt;br/&gt;+ setUsername(String): void&lt;br/&gt;+ setPassword(String): void&lt;br/&gt;+ setAddress(String): void&lt;br/&gt;+ getUsername(): String&lt;br/&gt;+ setBalance(double): void&lt;br/&gt;+ getEmail(): String&lt;br/&gt;+ setEmail(String): void&lt;br/&gt;+ setName(String): void&lt;br/&gt;+ getPhoneNumber(): String&lt;br/&gt;+ getAddress(): String&lt;br/&gt;+ getArea(): String&lt;br/&gt;+ setPhoneNumber(String): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;" parent="1" vertex="1">
+          <mxGeometry x="1181" y="920" width="229" height="597" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=1;startArrow=none;endArrow=block;endSize=12;strokeColor=#008200;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;" parent="1" source="node7" target="node1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge0" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=none;endArrow=block;endSize=12;strokeColor=#000082;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;" parent="1" source="node4" target="node8" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="346.5" y="1535" />
+              <mxPoint x="346.5" y="1390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge2" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=none;endArrow=block;endSize=12;strokeColor=#000082;exitX=0.538;exitY=0.011;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;exitPerimeter=0;" parent="1" source="node2" target="node8" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="622" y="1530" />
+              <mxPoint x="620" y="1530" />
+              <mxPoint x="620" y="1390" />
+              <mxPoint x="346" y="1390" />
+            </Array>
+            <mxPoint x="616" y="1530" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge1" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=none;endArrow=block;endSize=12;strokeColor=#000082;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;" parent="1" source="node6" target="node8" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge4" value="" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=1;startArrow=none;endArrow=block;endSize=12;strokeColor=#008200;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;" parent="1" source="node0" target="node1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2161" y="18" />
+              <mxPoint x="699" y="18" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

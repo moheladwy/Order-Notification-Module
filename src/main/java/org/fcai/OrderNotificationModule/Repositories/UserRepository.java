@@ -1,7 +1,6 @@
 package org.fcai.OrderNotificationModule.Repositories;
 
 import org.fcai.OrderNotificationModule.Models.User;
-import org.fcai.OrderNotificationModule.Exceptions.UserNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +12,9 @@ public class UserRepository {
         this.users = new ArrayList<>();
     }
 
-    public User isUserExist(String username, String password) {
+    public User getUserByUsername(String username) {
         for (User user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+            if (user.getUsername().equals(username)) {
                 return user;
             }
         }
@@ -27,11 +26,15 @@ public class UserRepository {
         if (user == null || user.getUsername() == null || user.getPassword() == null) {
             throw new IllegalArgumentException("User, username, and password cannot be null");
         }
-
+        if (user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("username, and password cannot be empty");
+        }
         if (isUsernameTaken(user.getUsername())) {
             throw new IllegalArgumentException("Username is already taken");
         }
-
+        if (user.getBalance() < 0) {
+            throw new IllegalArgumentException("balance cannot be negative");
+        }
         users.add(user);
     }
 

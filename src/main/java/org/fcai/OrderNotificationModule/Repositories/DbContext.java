@@ -1,7 +1,7 @@
 package org.fcai.OrderNotificationModule.Repositories;
 
-import org.fcai.OrderNotificationModule.Models.*;
 import org.fcai.OrderNotificationModule.Enums.CategoryName;
+import org.fcai.OrderNotificationModule.Models.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -26,11 +26,19 @@ public class DbContext {
     }
 
     private static UserRepository initializeUserRepository() {
-        return new UserRepository(); // TODO: Implement UserRepository Initialization
+        UserRepository userRepository = new UserRepository();
+
+        userRepository.registerNewUser(new User("user1", "User One", "user1@example.com", "password1", "Address1", "123456789", "Area1", 2000.0));
+        userRepository.registerNewUser(new User("user2", "User Two", "user2@example.com", "password2", "Address2", "987654321", "Area2", 1500.0));
+        userRepository.registerNewUser(new User("user3", "User Three", "user3@example.com", "password3", "Address3", "123456789", "Area3", 2000.0));
+        userRepository.registerNewUser(new User("user4", "User Four", "user4@example.com", "password4", "Address4", "987654321", "Area4", 2500.0));
+
+        return userRepository;
     }
 
     private static ProductRepository initializeProductRepository() {
         ProductRepository productRepository= new ProductRepository();
+
         productRepository.add(new Product(0,"Jeans","","Omar",200),60 );
         productRepository.add(new Product(1,"T-shirts","","Omar",200),70 );
         productRepository.add(new Product(2,"Jackets","","Omar",200),50 );
@@ -52,9 +60,14 @@ public class DbContext {
 
     }
 
-    private static CategoryRepository initializeCategoryRepository() {
+    // TODO: Add products for each category.
+    // ASSIGN: Adham
+    private CategoryRepository initializeCategoryRepository() {
         CategoryRepository categoryRepository = new CategoryRepository();
+
         categoryRepository.addNewCategory(new Category(1, CategoryName.FOOD, "Soft drinks, coffees, teas, beers, and ales"));
+        categoryRepository.addProductToCategory(1, productRepository.getById(0));
+        categoryRepository.addProductToCategory(1, productRepository.getById(1));
         categoryRepository.addNewCategory(new Category(2, CategoryName.FURNITURE, "Chairs, tables, beds, desks, dressers, and cupboards"));
         categoryRepository.addNewCategory(new Category(3, CategoryName.GROCERIES, "Bread, cheese, eggs, milk, and other dairy products"));
         categoryRepository.addNewCategory(new Category(4, CategoryName.HEALTH, "Medicines, vitamins, bandages, and other medical supplies"));
@@ -69,30 +82,32 @@ public class DbContext {
         return categoryRepository;
     }
 
-    public static OrderRepository initializeOrderRepository() {
+    private OrderRepository initializeOrderRepository() {
         OrderRepository orderRepository = new OrderRepository();
-
-        User user1 = new User("user1", "User One", "user1@example.com", "password1", "Address1", "123456789", "Area1", 1000.0);
-        User user2 = new User("user2", "User Two", "user2@example.com", "password2", "Address2", "987654321", "Area2", 1500.0);
-
-        Product product1 = new Product(0, "Jeans", "Category1", "Brand1", 200.0);
-        Product product2 = new Product(1, "T-shirts", "Category1", "Brand1", 150.0);
-        Product product3 = new Product(2, "Smartphones", "Category2", "Brand2", 1000.0);
-
-        OrderSpecs specs1 = new OrderSpecs(1, user1, 20.0);
-        OrderSpecs specs2 = new OrderSpecs(2, user2, 30.0);
+        OrderSpecs specs1 = new OrderSpecs(1, userRepository.getUserByUsername("user1"), 20.0);
+        OrderSpecs specs2 = new OrderSpecs(2, userRepository.getUserByUsername("user2"), 30.0);
 
         SimpleOrder simpleOrder1 = new SimpleOrder(specs1);
-        simpleOrder1.addProduct(product1, 2);
-        simpleOrder1.addProduct(product2, 3);
+        simpleOrder1.addProduct(productRepository.getById(1), 2);
+        simpleOrder1.addProduct(productRepository.getById(2), 3);
 
         SimpleOrder simpleOrder2 = new SimpleOrder(specs2);
-        simpleOrder2.addProduct(product3, 1);
-
-        CompoundOrder compoundOrder = new CompoundOrder(specs1, 2, List.of(simpleOrder1, simpleOrder2));
+        simpleOrder2.addProduct(productRepository.getById(3), 1);
 
         orderRepository.createSimpleOrder(simpleOrder1);
         orderRepository.createSimpleOrder(simpleOrder2);
+
+
+        SimpleOrder simpleOrder3 = new SimpleOrder(new OrderSpecs(3, userRepository.getUserByUsername("user3"), 40.0));
+        SimpleOrder simpleOrder4 = new SimpleOrder(new OrderSpecs(4, userRepository.getUserByUsername("user4"), 50.0));
+
+        simpleOrder3.addProduct(productRepository.getById(4), 2);
+        simpleOrder3.addProduct(productRepository.getById(5), 3);
+        
+        simpleOrder4.addProduct(productRepository.getById(6), 1);
+        simpleOrder4.addProduct(productRepository.getById(7), 2);
+
+        CompoundOrder compoundOrder = new CompoundOrder(specs1, 2, List.of(simpleOrder3, simpleOrder4));
         orderRepository.createCompoundOrder(compoundOrder);
 
         return orderRepository;
