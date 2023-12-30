@@ -1,4 +1,4 @@
-package org.fcai.OrderNotificationModule.Helper;
+package org.fcai.OrderNotificationModule.Helpers;
 
 // LoginRequest class to encapsulate username and password
  public class LoginRequest {
