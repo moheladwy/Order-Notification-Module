@@ -4,10 +4,15 @@ import org.fcai.OrderNotificationModule.Exceptions.CategoryNotFoundException;
 import org.fcai.OrderNotificationModule.Models.Category;
 import org.fcai.OrderNotificationModule.Models.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryRepository {
-    private List<Category> allCategories;
+    private final List<Category> allCategories;
+
+    public CategoryRepository() {
+        this.allCategories = new ArrayList<>();
+    }
 
     public List<Category> getAll() {
         return allCategories;
