@@ -13,12 +13,17 @@ public class OrderSpecs {
     private final LocalDateTime creationDate;
 
     public OrderSpecs(int id, User user, double shippingFees) {
-        setId(id);
-        setShippingFees(shippingFees);
-        setUser(user);
-        products = new HashMap<>();
-        productsPrice = 0;
-        creationDate = LocalDateTime.now();
+        try {
+            setId(id);
+            setShippingFees(shippingFees);
+            setUser(user);
+            products = new HashMap<>();
+            productsPrice = 0;
+            creationDate = LocalDateTime.now();
+        } catch (NullPointerException | IllegalArgumentException e) {
+            System.err.println("Failed to make order specs: " + e.getMessage());
+            throw e;
+        }
     }
 
     public int getId() {

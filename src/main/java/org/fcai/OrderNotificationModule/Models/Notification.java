@@ -1,26 +1,15 @@
 package org.fcai.OrderNotificationModule.Models;
 
-import org.fcai.OrderNotificationModule.Enums.NotificationChannel;
-import org.fcai.OrderNotificationModule.Enums.NotificationLanguage;
-
 public abstract class Notification {
 
-    protected final NotificationChannel channel;
-    protected final NotificationLanguage language;
-
+    protected final NotificationSpecs specs;
     protected String template;
 
-    public Notification(NotificationChannel channel, NotificationLanguage language) {
-        this.channel = channel;
-        this.language = language;
-    }
-
-    public NotificationChannel getChannel() {
-        return channel;
-    }
-
-    public NotificationLanguage getLanguage() {
-        return language;
+    public Notification(NotificationSpecs specs) {
+        if (specs == null) {
+            throw new NullPointerException("NotificationSpecs cannot be null");
+        }
+        this.specs = specs;
     }
 
     public String getTemplate() {
@@ -38,7 +27,7 @@ public abstract class Notification {
                             "Notification language: %s, " +
                             "Notification message: %s.",
                             this.getClass().getSimpleName(),
-                            this.getChannel(), this.getLanguage(),
+                            this.specs.getChannel(), this.specs.getLanguage(),
                             this.getNotificationMessage());
     }
 

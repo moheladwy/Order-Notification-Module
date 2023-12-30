@@ -3,15 +3,16 @@ package org.fcai.OrderNotificationModule.Repositories;
 import org.fcai.OrderNotificationModule.Exceptions.ProductNotFoundException;
 import org.fcai.OrderNotificationModule.Models.Product;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ProductRepository {
-    private final HashMap<Product, Integer> products;
+    private final Map<Product, Integer> products;
 
     public ProductRepository() {
-        products = new HashMap<Product, Integer>();
+        products = new HashMap<>();
     }
 
-    public HashMap<Product,Integer> getAll() {
+    public Map<Product, Integer> getAll() {
         return products;
     }
 

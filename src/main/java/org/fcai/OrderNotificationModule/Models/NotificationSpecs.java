@@ -13,36 +13,50 @@ public class NotificationSpecs {
 
     public NotificationSpecs(int orderNumber, String customerName, double refundAmount, int nDays,
                              NotificationChannel channel, NotificationLanguage language) {
-        this.orderNumber = orderNumber;
-        this.customerName = customerName;
-        this.refundAmount = refundAmount;
-        this.nDays = nDays;
-        this.channel = channel;
-        this.language = language;
+        try {
+            this.orderNumber = orderNumber;
+            setCustomerName(customerName);
+            setRefundAmount(refundAmount);
+            setNumberDays(nDays);
+            this.channel = channel;
+            this.language = language;
+        } catch (NullPointerException | IllegalArgumentException e) {
+            System.err.println("Failed to make notification specs: " + e.getMessage());
+            throw e;
+        }
     }
 
-    // make setters for all fields
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
     }
 
     public void setCustomerName(String customerName) {
+        if (customerName == null)
+            throw new NullPointerException("Customer name cannot be null");
         this.customerName = customerName;
     }
 
     public void setRefundAmount(double refundAmount) {
+        if (refundAmount <= 0)
+            throw new IllegalArgumentException("Refund amount must be positive number");
         this.refundAmount = refundAmount;
     }
 
     public void setNumberDays(int nDays) {
+        if (nDays < 0)
+            throw new IllegalArgumentException("Number of days cannot be negative");
         this.nDays = nDays;
     }
 
     public void setChannel(NotificationChannel channel) {
+        if (channel == null)
+            throw new NullPointerException("Channel cannot be null");
         this.channel = channel;
     }
 
     public void setLanguage(NotificationLanguage language) {
+        if (language == null)
+            throw new NullPointerException("Language cannot be null");
         this.language = language;
     }
 

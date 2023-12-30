@@ -23,7 +23,6 @@ public class PaymentController {
     public boolean pay(@PathVariable int orderId) throws OrderNotFoundException, OrderCancellationDurationException {
         Order order = context.orderRepository.getById(orderId);
 
-
         if (order == null) {
             throw new OrderNotFoundException(orderId);
         }
@@ -31,10 +30,9 @@ public class PaymentController {
         double orderTotalPrice = order.getTotalPrice();
         User user = order.getUser();
         if (orderTotalPrice > user.getBalance()) {
-            throw new BalanceNotEnoughException( user.getBalance(),orderTotalPrice);
+            throw new BalanceNotEnoughException(user.getBalance(), orderTotalPrice);
         }
         user.setBalance(user.getBalance() - orderTotalPrice);
-
         return true;
     }
 }

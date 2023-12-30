@@ -19,11 +19,9 @@ public class AuthenticationController {
 
     @PostMapping("/login/")
     public User login(@RequestBody LoginRequest loginRequest) {
-
         if(loginRequest == null) {
             throw new IllegalArgumentException("Login request cannot be null");
         }
-
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
 
@@ -31,14 +29,11 @@ public class AuthenticationController {
         if (username == null || password == null) {
             throw new IllegalArgumentException("Username and password cannot be null");
         }
-
         User user = context.userRepository.isUserExist(username, password);
-
         // Throw exception if user is not found
         if (user == null) {
             throw new UserNotFoundException(username);
         }
-
         return user;
     }
 
@@ -48,7 +43,6 @@ public class AuthenticationController {
         if (user == null || user.getUsername() == null || user.getPassword() == null) {
             throw new IllegalArgumentException("username, and password cannot be null");
         }
-
         context.userRepository.registerNewUser(user);
     }
 

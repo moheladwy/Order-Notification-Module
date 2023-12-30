@@ -35,12 +35,22 @@ public class CategoryController {
 
     @PostMapping("/add-new-category")
     public void addCategory(@RequestBody Category category) {
-        context.categoryRepository.addNewCategory(category);
+        try {
+            context.categoryRepository.addNewCategory(category);
+        } catch (NullPointerException e) {
+            System.err.println("Failed to add category: " + e.getMessage());
+            throw e;
+        }
     }
 
     @DeleteMapping("/remove/{id}")
     public void removeCategory(@PathVariable int id) {
-        context.categoryRepository.removeCategory(id);
+        try {
+            context.categoryRepository.removeCategory(id);
+        } catch (CategoryNotFoundException e) {
+            System.err.println("Failed to remove category: " + e.getMessage());
+            throw e;
+        }
     }
 
     @PostMapping("/add-product-to-category/{categoryId}/{productId}")
@@ -48,11 +58,21 @@ public class CategoryController {
         Product currentProduct = context.productRepository.getById(productId);
         if (currentProduct == null)
             throw new ProductNotFoundException(productId);
-        context.categoryRepository.addProductToCategory(categoryId, currentProduct);
+        try {
+            context.categoryRepository.addProductToCategory(categoryId, currentProduct);
+        } catch (CategoryNotFoundException e) {
+            System.err.println("Failed to add product to category: " + e.getMessage());
+            throw e;
+        }
     }
 
     @GetMapping("/get-products-by-category-id/{categoryId}")
     public List<Product> getProductsByCategory(@PathVariable int categoryId) {
-        return context.categoryRepository.getProductsByCategory(categoryId);
+        try {
+            return context.categoryRepository.getProductsByCategory(categoryId);
+        } catch (CategoryNotFoundException e) {
+            System.err.println("Failed to get products by category: " + e.getMessage());
+            throw e;
+        }
     }
 }

@@ -11,16 +11,26 @@ public class Category {
     private List<Product> products;
 
     public Category(int id, CategoryName name, String description, List<Product> products) {
-        setId(id);
-        setName(name);
-        setDescription(description);
-        setProducts(products);
+        try {
+            setId(id);
+            setName(name);
+            setDescription(description);
+            setProducts(products);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            System.err.println("Failed to make category: " + e.getMessage());
+            throw e;
+        }
     }
 
     public Category(int id, CategoryName categoryName, String description) {
-        setId(id);
-        setName(categoryName);
-        setDescription(description);
+        try {
+            setId(id);
+            setName(categoryName);
+            setDescription(description);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            System.err.println("Failed to make category: " + e.getMessage());
+            throw e;
+        }
     }
 
     public int getId() {
@@ -70,6 +80,7 @@ public class Category {
         products.add(product);
     }
 
+    // TODO: to be reimplemented again.
     public void removeProduct(Product product) {
         if (product == null)
             throw new NullPointerException("Product cannot be null");

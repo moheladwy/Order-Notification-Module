@@ -1,7 +1,6 @@
 package org.fcai.OrderNotificationModule.Repositories;
 
 import org.fcai.OrderNotificationModule.Models.User;
-import org.fcai.OrderNotificationModule.Exceptions.UserNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,15 @@ public class UserRepository {
     public User isUserExist(String username, String password) {
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public User getUserByUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
                 return user;
             }
         }

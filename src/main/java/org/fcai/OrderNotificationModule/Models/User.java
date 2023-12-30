@@ -11,14 +11,19 @@ public class User {
     private double balance;
 
     public User(String username, String name, String email, String password, String address, String phoneNumber, String area, double balance) {
-        setUsername(username);
-        setEmail(email);
-        setPassword(password);
-        setPhoneNumber(phoneNumber);
-        setName(name);
-        setArea(area);
-        setAddress(address);
-        setBalance(balance);
+        try {
+            setUsername(username);
+            setEmail(email);
+            setPassword(password);
+            setPhoneNumber(phoneNumber);
+            setName(name);
+            setArea(area);
+            setAddress(address);
+            setBalance(balance);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            System.err.println("Failed to make user: " +e.getMessage());
+            throw e;
+        }
     }
 
 

@@ -9,18 +9,23 @@ public class CompoundOrder implements Order {
     public final int MAX_ORDERS;
 
     public CompoundOrder(OrderSpecs specs, int MAX_ORDERS, List<Order> simpleOrders) {
-        setSpecs(specs);
-        this.MAX_ORDERS = MAX_ORDERS;
-        setSimpleOrders(simpleOrders);
+        try {
+            setSpecs(specs);
+            this.MAX_ORDERS = MAX_ORDERS;
+            setSimpleOrders(simpleOrders);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            System.err.println("Failed to make Compound Order: " + e.getMessage());
+            throw e;
+        }
     }
 
     @Override
     public double getTotalPrice() {
-        double totalPrice = 0;
+        double totalPrice = specs.getProductsPrice() + specs.getShippingFees();
         for (Order order : simpleOrders) {
             totalPrice += order.getTotalPrice();
         }
-        return totalPrice + specs.getShippingFees();
+        return totalPrice;
     }
 
     @Override
@@ -49,7 +54,6 @@ public class CompoundOrder implements Order {
         return orderDetails.toString();
     }
 
-
     @Override
     public LocalDateTime getCreationDate() {
         return specs.getCreationDate();
@@ -59,10 +63,12 @@ public class CompoundOrder implements Order {
     public User getUser() {
         return specs.getUser();
     }
+
     @Override
     public int getId() {
         return specs.getId();
     }
+
     public OrderSpecs getSpecs() {
         return specs;
     }
