@@ -51,34 +51,57 @@ public class DbContext {
         productRepository.add(new Product(8,"Snacks","","Mohamed",10),44 );
         productRepository.add(new Product(9,"Sofas","","Adham",1000),12 );
         productRepository.add(new Product(10,"Beds","","Adham",2000),45 );
-        productRepository.add(new Product(11,"Chairs","","Adham",1000),34 );
+        productRepository.add(new Product(11,"Chairs","","Adham",1000),34);
         productRepository.add(new Product(12,"Vitamins and supplements","","Adham",500),88 );
         productRepository.add(new Product(13,"Sports accessories","","Adham",500),98 );
         productRepository.add(new Product(14,"Dolls","","Omar",200),33 );
         productRepository.add(new Product(15,"Printers","","Omar",5000),33 );
+        productRepository.add(new Product(16,"Pens","","Omar",5000),33 );
+        productRepository.add(new Product(17,"Home Appliances","","Adham",500),88 );
+        productRepository.add(new Product(18,"Cleaning Supplies","","Adham",500),98 );
+        productRepository.add(new Product(19,"Kitchen Appliances","","Adham",500),98 );
+        productRepository.add(new Product(20,"Outdoor lighting","","Adham",500),98 );
+        productRepository.add(new Product(21,"Outdoor furniture","","Adham",500),98 );
+        productRepository.add(new Product(22,"Dumbbell","","Adham",500),98 );
+        productRepository.add(new Product(23,"Gift Card","","Adham",500),98 );
 
         return productRepository;
 
     }
 
-    // TODO: Add products for each category.
     // ASSIGN: Adham
     private CategoryRepository initializeCategoryRepository() {
         CategoryRepository categoryRepository = new CategoryRepository();
 
         categoryRepository.addNewCategory(new Category(1, CategoryName.FOOD, "Soft drinks, coffees, teas, beers, and ales"));
-        categoryRepository.addProductToCategory(1, productRepository.getById(0));
-        categoryRepository.addProductToCategory(1, productRepository.getById(1));
+        categoryRepository.addProductToCategory(1, productRepository.getById(8));
         categoryRepository.addNewCategory(new Category(2, CategoryName.FURNITURE, "Chairs, tables, beds, desks, dressers, and cupboards"));
+        categoryRepository.addProductToCategory(2, productRepository.getById(9));
+        categoryRepository.addProductToCategory(2, productRepository.getById(10));
+        categoryRepository.addProductToCategory(2, productRepository.getById(11));
         categoryRepository.addNewCategory(new Category(3, CategoryName.GROCERIES, "Bread, cheese, eggs, milk, and other dairy products"));
+        categoryRepository.addProductToCategory(3, productRepository.getById(6));
+        categoryRepository.addProductToCategory(3, productRepository.getById(7));
         categoryRepository.addNewCategory(new Category(4, CategoryName.HEALTH, "Medicines, vitamins, bandages, and other medical supplies"));
+        categoryRepository.addProductToCategory(4, productRepository.getById(12));
         categoryRepository.addNewCategory(new Category(5, CategoryName.HOME, "Cleaning supplies, cooking utensils, and various other household items"));
+        categoryRepository.addProductToCategory(5, productRepository.getById(17));
+        categoryRepository.addProductToCategory(5, productRepository.getById(18));
         categoryRepository.addNewCategory(new Category(6, CategoryName.KITCHEN, "Pots, pans, dishes, cutlery, and various other kitchen items"));
+        categoryRepository.addProductToCategory(6, productRepository.getById(19));
         categoryRepository.addNewCategory(new Category(7, CategoryName.OFFICE, "Pens, pencils, paper, binders, and other office supplies"));
+        categoryRepository.addProductToCategory(7, productRepository.getById(15));
+        categoryRepository.addProductToCategory(7, productRepository.getById(16));
         categoryRepository.addNewCategory(new Category(8, CategoryName.OUTDOORS, "Lawn mowers, shovels, rakes, and other outdoor items"));
+        categoryRepository.addProductToCategory(8, productRepository.getById(20));
+        categoryRepository.addProductToCategory(8, productRepository.getById(21));
         categoryRepository.addNewCategory(new Category(9, CategoryName.SPORTS, "Balls, bats, gloves, and various other sports items"));
+        categoryRepository.addProductToCategory(9, productRepository.getById(13));
+        categoryRepository.addProductToCategory(9, productRepository.getById(22));
         categoryRepository.addNewCategory(new Category(10, CategoryName.TOYS, "Dolls, board games, puzzles, and various other toys"));
+        categoryRepository.addProductToCategory(10, productRepository.getById(14));
         categoryRepository.addNewCategory(new Category(11, CategoryName.OTHER, "Various other items"));
+        categoryRepository.addProductToCategory(11, productRepository.getById(23));
 
         return categoryRepository;
     }
