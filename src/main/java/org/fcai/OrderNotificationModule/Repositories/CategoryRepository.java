@@ -42,17 +42,6 @@ public class CategoryRepository {
         currentCategory.addProduct(product);
     }
 
-    public void removeProductFromCategory(int categoryId, Product product) {
-        if (product == null)
-            throw new NullPointerException("Product can't be null");
-
-        Category currentCategory = getCategory(categoryId);
-        if(currentCategory == null)
-            throw new CategoryNotFoundException(categoryId);
-
-        currentCategory.removeProduct(product);
-    }
-
     public List<Product> getProductsByCategory(int categoryId) {
         Category currentCategory = getCategory(categoryId);
 

@@ -7,7 +7,7 @@ public class OrderPlacedNotification extends Notification {
     public OrderPlacedNotification(NotificationSpecs specs) {
         super(specs);
         if (specs.getLanguage() == NotificationLanguage.English)
-            this.setTemplate("Dear %s, your order %d has been placed successfully");
+            this.setTemplate("Dear %s, your order #%d has been placed successfully");
         else
             this.setTemplate("عزيزي %s، تم إنشاء طلبك رقم %d بنجاح");
     }

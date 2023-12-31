@@ -17,6 +17,14 @@ public class OrderRepository {
         return orders;
     }
 
+    public int getNumberOfOrders() {
+        int numberOfOrders = 0;
+        for (Order order : orders) {
+            numberOfOrders += order.getOrderCount();
+        }
+        return numberOfOrders;
+    }
+
     public Order getById(int id) {
         for (Order order : orders) {
             if (order.getId() == id) {
@@ -38,16 +46,6 @@ public class OrderRepository {
             throw new NullPointerException("Order cannot be null");
         }
         orders.add(order);
-    }
-
-    public void delete(Order order) {
-        if (order == null) {
-            throw new NullPointerException("Order cannot be null");
-        }
-        boolean removed = orders.remove(order);
-        if (!removed) {
-            throw new OrderNotFoundException(order.getId());
-        }
     }
 }
 

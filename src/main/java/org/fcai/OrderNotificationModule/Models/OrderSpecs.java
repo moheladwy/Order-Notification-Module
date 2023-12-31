@@ -1,5 +1,7 @@
 package org.fcai.OrderNotificationModule.Models;
 
+import org.fcai.OrderNotificationModule.Enums.OrderStatus;
+
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,12 +13,15 @@ public class OrderSpecs {
     private double shippingFees;
     private User user;
     private final LocalDateTime creationDate;
+    private OrderStatus status;
 
-    public OrderSpecs(int id, User user, double shippingFees) {
+    public OrderSpecs(int id, User user, double shippingFees, OrderStatus status) {
+        this.status = status;
         try {
             setId(id);
             setShippingFees(shippingFees);
             setUser(user);
+            setStatus(status);
             products = new HashMap<>();
             productsPrice = 0;
             creationDate = LocalDateTime.now();
@@ -102,4 +107,13 @@ public class OrderSpecs {
         return creationDate;
     }
 
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        if (status == null)
+            throw new NullPointerException("Status cannot be null");
+        this.status = status;
+    }
 }

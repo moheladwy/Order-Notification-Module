@@ -1,5 +1,7 @@
 package org.fcai.OrderNotificationModule.Models;
 
+import org.fcai.OrderNotificationModule.Enums.OrderStatus;
+
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -19,16 +21,18 @@ public class SimpleOrder implements Order {
 
     @Override
     public String getOrderDetails() {
-        // TODO: Implement logic to generate order details as a string
         StringBuilder orderDetails = new StringBuilder();
         orderDetails.append("Order ID: ").append(specs.getId()).append("\n");
         orderDetails.append("User: ").append(specs.getUser().getUsername()).append("\n");
         orderDetails.append("Creation Date: ").append(specs.getCreationDate()).append("\n");
         orderDetails.append("Products:\n");
         for (Map.Entry<Product, Integer> entry : specs.getProducts().entrySet()) {
-            orderDetails.append(entry.getKey().getName()).append(": ").append(entry.getValue()).append(" units\n");
+            orderDetails.append(entry.getKey().getName()).append(": ")
+                    .append(entry.getValue()).append(" units, ")
+                    .append(entry.getKey().getPrice()).append("$ for each unit.\n");
         }
-        orderDetails.append("Total Price: ").append(getTotalPrice()).append("\n");
+        orderDetails.append("Shipping Fees: ").append(specs.getShippingFees()).append("$\n");
+        orderDetails.append("Total Price: ").append(getTotalPrice()).append("$\n");
 
         return orderDetails.toString();
     }
@@ -44,10 +48,38 @@ public class SimpleOrder implements Order {
     }
 
     @Override
+    public OrderStatus getStatus() {
+        return specs.getStatus();
+    }
+
+    @Override
+    public void setStatus(OrderStatus status) {
+        if (status == null)
+            throw new NullPointerException("Order Status cannot be null");
+        specs.setStatus(status);
+    }
+
+    @Override
+    public void setShippingFees(double shippingFees) {
+        specs.setShippingFees(shippingFees);
+    }
+
+    @Override
+    public double getShippingFees() {
+        return specs.getShippingFees();
+    }
+
+    @Override
+    public int getOrderCount() {
+        return 1;
+    }
+
+    @Override
     public int getId() {
         return specs.getId();
     }
 
+    @Override
     public OrderSpecs getSpecs() {
         return specs;
     }
