@@ -32,4 +32,8 @@ public abstract class Notification {
     }
 
     public abstract String getNotificationMessage();
+
+    public NotificationSpecs getSpecs() {
+        return specs;
+    }
 }

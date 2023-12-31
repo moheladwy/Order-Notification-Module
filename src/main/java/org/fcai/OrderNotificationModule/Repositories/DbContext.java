@@ -1,6 +1,8 @@
 package org.fcai.OrderNotificationModule.Repositories;
 
 import org.fcai.OrderNotificationModule.Enums.CategoryName;
+import org.fcai.OrderNotificationModule.Enums.NotificationChannel;
+import org.fcai.OrderNotificationModule.Enums.NotificationLanguage;
 import org.fcai.OrderNotificationModule.Enums.OrderStatus;
 import org.fcai.OrderNotificationModule.Models.*;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,7 @@ public class DbContext {
     public final ProductRepository productRepository;
     public final CategoryRepository categoryRepository;
     public final OrderRepository orderRepository;
+    public final NotificationRepository notificationRepository;
 
     public DbContext() {
         try {
@@ -20,6 +23,7 @@ public class DbContext {
             productRepository = initializeProductRepository();
             categoryRepository = initializeCategoryRepository();
             orderRepository = initializeOrderRepository();
+            notificationRepository = initializeNotificationRepository();
         } catch (Exception e) {
             System.err.println("Error initializing repositories: " + e.getMessage());
             throw e;
@@ -136,5 +140,18 @@ public class DbContext {
         orderRepository.createCompoundOrder(compoundOrder);
 
         return orderRepository;
+    }
+
+    private NotificationRepository initializeNotificationRepository(){
+        NotificationRepository notificationRepository=new NotificationRepository();
+        Notification notification1=new OrderPlacedNotification(new NotificationSpecs(1,"user1",0,0, NotificationChannel.Email, NotificationLanguage.English));
+        Notification notification2=new OrderPlacedNotification(new NotificationSpecs(2,"user2",0,0,NotificationChannel.Email,NotificationLanguage.English));
+        Notification notification3=new OrderPlacedNotification(new NotificationSpecs(3,"user3",0,0,NotificationChannel.SMS,NotificationLanguage.English));
+        Notification notification4=new OrderPlacedNotification(new NotificationSpecs(4,"user4",0,0,NotificationChannel.Email,NotificationLanguage.Arabic));
+        notificationRepository.addNotification(notification1);
+        notificationRepository.addNotification(notification2);
+        notificationRepository.addNotification(notification3);
+        notificationRepository.addNotification(notification4);
+        return notificationRepository;
     }
 }

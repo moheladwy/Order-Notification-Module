@@ -85,6 +85,7 @@ public class OrderController {
         try {
             Order order = context.orderRepository.getById(orderStatusDto.orderId);
             order.setStatus(orderStatusDto.status);
+            notificationProcessor.sendNotification(order, NotificationLanguage.English, NotificationChannel.Email);
         } catch (OrderNotFoundException e) {
             System.err.println("Order not found: " + e.getMessage());
             throw e;
@@ -129,6 +130,7 @@ public class OrderController {
                     throw new OrderCancellationDurationException("Cannot delete order after " + MAX_CANCEL_DURATION_IN_MINUTES + " minutes of Shipment.");
             }
             order.setStatus(OrderStatus.OrderCancelled);
+            notificationProcessor.sendNotification(order, NotificationLanguage.English, NotificationChannel.Email);
         } catch (OrderNotFoundException e) {
             System.err.println("Order not found: " + e.getMessage());
             throw e;
