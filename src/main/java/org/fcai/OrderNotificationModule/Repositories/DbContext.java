@@ -13,6 +13,7 @@ public class DbContext {
     public final ProductRepository productRepository;
     public final CategoryRepository categoryRepository;
     public final OrderRepository orderRepository;
+    public final NotificationRepository notificationRepository;
 
     public DbContext() {
         try {
@@ -20,6 +21,7 @@ public class DbContext {
             productRepository = initializeProductRepository();
             categoryRepository = initializeCategoryRepository();
             orderRepository = initializeOrderRepository();
+            notificationRepository = new NotificationRepository();
         } catch (Exception e) {
             System.err.println("Error initializing repositories: " + e.getMessage());
             throw e;

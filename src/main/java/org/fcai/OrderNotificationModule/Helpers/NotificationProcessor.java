@@ -2,7 +2,6 @@ package org.fcai.OrderNotificationModule.Helpers;
 
 import org.fcai.OrderNotificationModule.Enums.NotificationChannel;
 import org.fcai.OrderNotificationModule.Enums.NotificationLanguage;
-import org.fcai.OrderNotificationModule.Helpers.NotificationFactory;
 import org.fcai.OrderNotificationModule.Models.Notification;
 import org.fcai.OrderNotificationModule.Models.NotificationSpecs;
 import org.fcai.OrderNotificationModule.Models.Order;
@@ -27,6 +26,10 @@ public class NotificationProcessor {
         this.notificationQueue = new LinkedList<>();
     }
 
+    public Queue<Notification> getNotificationQueue() {
+        return notificationQueue;
+    }
+
     public void sendNotification(Order order,
                                  NotificationLanguage language,
                                  NotificationChannel channel) {
@@ -44,20 +47,20 @@ public class NotificationProcessor {
     @Scheduled(fixedDelay = 1000)
     public void sendNotification() throws IOException {
         try {
-            File file = new File("target/Logging/SendingNotificationLoggingFile.txt");
+            File file = new File("src/main/java/org/fcai/OrderNotificationModule/LoggingFiles/SendingNotificationLoggingFile.txt");
             FileOutputStream outputStream = new FileOutputStream(file, true);
             String notificationLoggerHeader = "";
             if (notificationQueue.isEmpty()) {
                 notificationLoggerHeader = "No notifications to send\n";
-                System.out.printf(notificationLoggerHeader);
-                outputStream.write(notificationLoggerHeader.getBytes());
             } else {
-                notificationLoggerHeader = notificationQueue.poll().toString();
+                assert notificationQueue.peek() != null;
+                Notification notification = notificationQueue.peek();
+                notificationLoggerHeader = notification.toString();
                 notificationLoggerHeader = notificationLoggerHeader
                         .concat(String.format(", Sent at: %s\n", LocalDateTime.now().toString()));
-                System.out.printf(notificationLoggerHeader);
-                outputStream.write(notificationLoggerHeader.getBytes());
             }
+            System.out.printf(notificationLoggerHeader);
+            outputStream.write(notificationLoggerHeader.getBytes());
             outputStream.close();
         }
         catch (IOException e) {
