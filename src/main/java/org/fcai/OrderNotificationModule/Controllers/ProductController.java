@@ -3,6 +3,7 @@ package org.fcai.OrderNotificationModule.Controllers;
 import org.fcai.OrderNotificationModule.DTOs.ProductDto;
 import org.fcai.OrderNotificationModule.DTOs.UpdateProductQuantityDto;
 import org.fcai.OrderNotificationModule.Exceptions.ProductNotFoundException;
+import org.fcai.OrderNotificationModule.Helpers.ProductProcessor;
 import org.fcai.OrderNotificationModule.Models.Product;
 import org.fcai.OrderNotificationModule.Repositories.DbContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,12 @@ import java.util.Map;
 @RequestMapping("/products")
 public class ProductController {
     private final DbContext context;
+    private final ProductProcessor productProcessor;
 
     @Autowired
-    public ProductController(DbContext context) {
+    public ProductController(DbContext context, ProductProcessor productProcessor) {
         this.context = context;
+        this.productProcessor = productProcessor;
     }
 
     // DONE.
@@ -48,13 +51,7 @@ public class ProductController {
     @PostMapping("/add")
     public void addProduct(@RequestBody ProductDto productDto) {
         try {
-            Product product = new Product(
-                    productDto.id,
-                    productDto.name,
-                    productDto.description,
-                    productDto.vendor,
-                    productDto.price
-            );
+            Product product = productProcessor.createProduct(productDto);
             context.productRepository.add(product, productDto.quantity);
         } catch (NullPointerException | IllegalArgumentException e) {
             System.err.println("Failed to add product: " + e.getMessage());

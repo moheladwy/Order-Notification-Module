@@ -52,4 +52,14 @@ public class ProductRepository {
         }
         throw new ProductNotFoundException(id);
     }
+
+    public int getNextId() {
+        int maxId = Integer.MIN_VALUE;
+        for (Product key : products.keySet()){
+            if (key.getId() > maxId) {
+                maxId = key.getId();
+            }
+        }
+        return maxId + 1;
+    }
 }
