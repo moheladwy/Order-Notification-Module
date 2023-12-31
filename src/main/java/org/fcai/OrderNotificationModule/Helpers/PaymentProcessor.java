@@ -17,7 +17,6 @@ public class PaymentProcessor {
         this.context = context;
     }
 
-    // TODO: Test this method.
     public void pay(int orderId) throws OrderNotFoundException, BalanceNotEnoughException {
         Order order = context.orderRepository.getById(orderId);
 

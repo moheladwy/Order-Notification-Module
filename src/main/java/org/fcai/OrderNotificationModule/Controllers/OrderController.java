@@ -1,6 +1,7 @@
 package org.fcai.OrderNotificationModule.Controllers;
 
 import org.fcai.OrderNotificationModule.DTOs.CompoundOrderDto;
+import org.fcai.OrderNotificationModule.DTOs.OrderResponseDto;
 import org.fcai.OrderNotificationModule.DTOs.SimpleOrderDto;
 import org.fcai.OrderNotificationModule.DTOs.UpdateOrderStatusDto;
 import org.fcai.OrderNotificationModule.Enums.NotificationChannel;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,10 +41,20 @@ public class OrderController {
     }
 
     // Done.
-    // TODO: Test the displaying of the products in the order (Because it's not working properly by the HasMap).
     @GetMapping("/get-all")
-    public List<Order> getAllOrders() {
-        return context.orderRepository.getAll();
+    public List<OrderResponseDto> getAllOrders() {
+        try {
+            List<Order> orders = context.orderRepository.getAll();
+            List<OrderResponseDto> orderResponseDtos = new ArrayList<>();
+            for (Order order : orders) {
+                var orderResponseDto = orderProcessor.getOrderResponseDto(order);
+                orderResponseDtos.add(orderResponseDto);
+            }
+            return orderResponseDtos;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            throw e;
+        }
     }
 
     // Done.

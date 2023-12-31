@@ -1,6 +1,7 @@
 package org.fcai.OrderNotificationModule.Helpers;
 
 import org.fcai.OrderNotificationModule.DTOs.CompoundOrderDto;
+import org.fcai.OrderNotificationModule.DTOs.OrderResponseDto;
 import org.fcai.OrderNotificationModule.DTOs.SimpleOrderDto;
 import org.fcai.OrderNotificationModule.Enums.OrderStatus;
 import org.fcai.OrderNotificationModule.Exceptions.BalanceNotEnoughException;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class OrderProcessor {
@@ -74,5 +76,22 @@ public class OrderProcessor {
             }
         }
         return new CompoundOrder(specsOfSuperUser, simpleOrders);
+    }
+
+    public OrderResponseDto getOrderResponseDto(Order order) {
+        OrderResponseDto orderResponseDto = new OrderResponseDto();
+        orderResponseDto.id = order.getId();
+        orderResponseDto.shippingFees = order.getShippingFees();
+        orderResponseDto.productsPrice = order.getTotalPrice() - order.getShippingFees();
+        orderResponseDto.creationDate = order.getCreationDate();
+        orderResponseDto.status = order.getStatus();
+        orderResponseDto.productsQuantities = new ArrayList<>();
+        orderResponseDto.products = new ArrayList<>();
+        var map = order.getSpecs().getProducts();
+        for (Map.Entry<Product, Integer> entry : map.entrySet()) {
+            orderResponseDto.products.add(entry.getKey());
+            orderResponseDto.productsQuantities.add(List.of(entry.getKey().getId(), entry.getValue()));
+        }
+        return orderResponseDto;
     }
 }
