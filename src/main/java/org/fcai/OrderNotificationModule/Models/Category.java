@@ -86,14 +86,11 @@ public class Category {
         products.add(product);
     }
 
-    // TODO: to be reimplemented again.
     public void removeProduct(Product product) {
         if (product == null)
             throw new NullPointerException("Product cannot be null");
 
         if(!products.remove(product))
             throw new IllegalArgumentException("Product does not exist in this category");
-
-        products.remove(product);
     }
 }

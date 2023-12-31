@@ -1,27 +1,24 @@
-package org.fcai.OrderNotificationModule.Controllers;
+package org.fcai.OrderNotificationModule.Helpers;
 
 import org.fcai.OrderNotificationModule.Exceptions.BalanceNotEnoughException;
 import org.fcai.OrderNotificationModule.Exceptions.OrderNotFoundException;
-import org.fcai.OrderNotificationModule.Exceptions.OrderCancellationDurationException;
 import org.fcai.OrderNotificationModule.Models.Order;
 import org.fcai.OrderNotificationModule.Models.User;
 import org.fcai.OrderNotificationModule.Repositories.DbContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Component;
 
-@RestController
-@RequestMapping("/payment")
-public class PaymentController {
+@Component
+public class PaymentProcessor {
     private final DbContext context;
 
     @Autowired
-    public PaymentController(DbContext context) {
+    public PaymentProcessor(DbContext context) {
         this.context = context;
     }
 
-    // DONE.
-    @GetMapping("/pay-order/{orderId}")
-    public boolean pay(@PathVariable int orderId) throws OrderNotFoundException, OrderCancellationDurationException {
+    // TODO: Test this method.
+    public void pay(int orderId) throws OrderNotFoundException, BalanceNotEnoughException {
         Order order = context.orderRepository.getById(orderId);
 
         if (order == null) {
@@ -31,9 +28,8 @@ public class PaymentController {
         double orderTotalPrice = order.getTotalPrice();
         User user = order.getUser();
         if (orderTotalPrice > user.getBalance()) {
-            throw new BalanceNotEnoughException(user.getBalance(), orderTotalPrice);
+            throw new BalanceNotEnoughException(user, orderTotalPrice);
         }
         user.setBalance(user.getBalance() - orderTotalPrice);
-        return true;
     }
 }

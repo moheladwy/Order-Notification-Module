@@ -1,17 +1,17 @@
 package org.fcai.OrderNotificationModule.Models;
 
+import org.fcai.OrderNotificationModule.Enums.OrderStatus;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class CompoundOrder implements Order {
     private OrderSpecs specs;
     private List<Order> simpleOrders;
-    public final int MAX_ORDERS;
 
-    public CompoundOrder(OrderSpecs specs, int MAX_ORDERS, List<Order> simpleOrders) {
+    public CompoundOrder(OrderSpecs specs, List<Order> simpleOrders) {
         try {
             setSpecs(specs);
-            this.MAX_ORDERS = MAX_ORDERS;
             setSimpleOrders(simpleOrders);
         } catch (NullPointerException | IllegalArgumentException e) {
             System.err.println("Failed to make Compound Order: " + e.getMessage());
@@ -65,10 +65,45 @@ public class CompoundOrder implements Order {
     }
 
     @Override
+    public OrderStatus getStatus() {
+        return specs.getStatus();
+    }
+
+    @Override
+    public void setStatus(OrderStatus status) {
+        if (status == null)
+            throw new NullPointerException("Order Status cannot be null");
+        specs.setStatus(status);
+        for (Order order : simpleOrders) {
+            order.setStatus(status);
+        }
+    }
+
+    @Override
+    public void setShippingFees(double shippingFees) {
+        specs.setShippingFees(shippingFees);
+    }
+
+    @Override
+    public double getShippingFees() {
+        return specs.getShippingFees();
+    }
+
+    @Override
+    public int getOrderCount() {
+        int orderCount = 1;
+        for (Order order : simpleOrders) {
+            orderCount += order.getOrderCount();
+        }
+        return orderCount;
+    }
+
+    @Override
     public int getId() {
         return specs.getId();
     }
 
+    @Override
     public OrderSpecs getSpecs() {
         return specs;
     }
@@ -86,8 +121,6 @@ public class CompoundOrder implements Order {
     public void setSimpleOrders(List<Order> simpleOrders) {
         if (simpleOrders == null)
             throw new NullPointerException("SimpleOrders cannot be null");
-        if (simpleOrders.size() > MAX_ORDERS)
-            throw new IllegalArgumentException("SimpleOrders cannot be more than " + MAX_ORDERS + " orders");
         this.simpleOrders = simpleOrders;
     }
 }
