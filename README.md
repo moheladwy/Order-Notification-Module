@@ -41,8 +41,8 @@ This project is a comprehensive "Orders and Notifications Management" system des
 The system is divided into several subsystems, each responsible for specific functionalities. Key subsystems include Authentication, Registration, Product and Category Management, Order Processing, Balance and Shipping Fees Management, and the Notifications Center.
 
 ## Authors
+- [Mohamed Hussein Al-Adawy](https://github.com/moheladwy)
 - [Amr Khaled El-Hennawi](https://github.com/AmrElHennawi)
-- [Mohamed Hussein Hassan](https://github.com/moheladwy)
 - [Adham Wael Mansour](https://github.com/Mansour266)
 - [Omar Abdelrahman Ibrahim](https://github.com/OmarAbdelrahaman)
 
